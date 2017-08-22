@@ -1,0 +1,52 @@
+﻿.red-top-line {
+    position: fixed;
+    top: 0;
+    height: 20px;
+    width: 100%;
+    background-color: #c1272d;
+}
+
+.navbar-fixed-top {
+    top: 20px;
+}
+
+.navbar a:hover {
+    color: white !important;
+    text-decoration: underline !important;
+}
+
+.body-content {
+    margin-top: 20px;
+}
+
+.nav-stacked {
+    float: left;
+    width: 20%;
+    max-width: 273px;
+    margin: 50px 30px 0 10px;
+    border: 1px solid gray;
+    border-top: 0;
+}
+
+.nav-stacked li a {
+    border-radius: 0;
+}
+
+.dropdown-toggle {
+    border-color: gray !important;
+    border-top: 1px solid gray;
+}
+
+.dropdown-menu {
+    position: static;
+    width: 100%;
+    border: 0;
+    z-index: auto;
+    float: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu .divider {
+    margin: 0 0 5px 0;
+}

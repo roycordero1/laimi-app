@@ -24,7 +24,9 @@ namespace LAIMIStock
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-lumen.css",
+                      "~/Content/layout.css",
+                      "~/Content/home.css",
                       "~/Content/site.css"));
         }
     }

@@ -8,17 +8,19 @@ using LAIMIStock.ViewModels;
 
 namespace LAIMIStock.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class CategoriesController : Controller
+    {        
+
+        // GET: Categories
         public ActionResult Index()
         {
             laimistockappEntities db = new laimistockappEntities();
             CategoriasSuministros categorydb = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == 1);
 
-
-
-            Category category = new Category { categoryName = categorydb.nombre, categoryImage = categorydb.imagenURL };
-
+            
+            
+            Category category = new Category {categoryName = categorydb.nombre, categoryImage = categorydb.imagenURL};
+            
             var categories2 = new List<Category>();
             categories2.Add(category);
 
@@ -34,21 +36,12 @@ namespace LAIMIStock.Controllers
             {
                 Categories = categories2
             };
-
+            
             return View(viewModel);
         }
 
-        public ActionResult About()
+        public ActionResult Random()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
