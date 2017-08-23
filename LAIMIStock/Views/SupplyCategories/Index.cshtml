@@ -1,0 +1,15 @@
+﻿@model LAIMIStock.ViewModels.ListSuppliesViewModel
+@{
+    ViewBag.Title = "Suministros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Suministros</h2>
+
+<ul>
+    @foreach (var suministro in Model.Suministros)
+    {        
+        <li>@suministro.descripcion</li>
+    }
+</ul>
+

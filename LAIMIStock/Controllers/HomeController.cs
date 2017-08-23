@@ -13,26 +13,17 @@ namespace LAIMIStock.Controllers
         public ActionResult Index()
         {
             laimistockappEntities db = new laimistockappEntities();
-            CategoriasSuministros categorydb = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == 1);
+            var categoriesDb = db.CategoriasSuministros.DefaultIfEmpty();
 
-
-
-            Category category = new Category { categoryName = categorydb.nombre, categoryImage = categorydb.imagenURL };
-
-            var categories2 = new List<Category>();
-            categories2.Add(category);
-
-
-            var categories = new List<Category>
+            var categoriesList = new List<CategoriasSuministros>();
+            foreach (var categoryAux in categoriesDb)
             {
-                new Category() { categoryName = "Papel", categoryImage = "https://image.freepik.com/iconos-gratis/papel-impreso_318-49898.jpg" },
-                new Category() { categoryName = "Toner", categoryImage = "https://image.freepik.com/iconos-gratis/gota-de-tinta_318-53374.jpg" },
-                new Category() { categoryName = "3D", categoryImage = "https://image.freepik.com/iconos-gratis/3d-impreso-hoja-de-papel-la-imagen-de-un-cubo-con_318-60115.jpg" }
-            };
+                categoriesList.Add(categoryAux);
+            }            
 
             var viewModel = new ListCategoriesViewModel
             {
-                Categories = categories2
+                Categories = categoriesList
             };
 
             return View(viewModel);

@@ -6,8 +6,8 @@ using LAIMIStock.Models;
 
 namespace LAIMIStock.ViewModels
 {
-    public class ListCategoriesViewModel
+    public class ListSuppliesViewModel
     {
-        public List<CategoriasSuministros> Categories { get; set; }
+        public List<Suministros> Suministros { get; set; }
     }
 }
