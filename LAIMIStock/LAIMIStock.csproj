@@ -198,6 +198,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssetCategoriesController.cs" />
     <Compile Include="Controllers\SupplyCategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -276,7 +277,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ListCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\ListAssetsViewModel.cs" />
+    <Compile Include="ViewModels\ListCategoriesAViewModel.cs" />
+    <Compile Include="ViewModels\ListCategoriesSViewModel.cs" />
     <Compile Include="ViewModels\ListSuppliesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -362,7 +365,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\SupplyCategories\Random.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\SupplyCategories\ListSupplies.cshtml" />
+    <Content Include="Views\AssetCategories\Index.cshtml" />
     <Content Include="Views\SupplyCategories\Index.cshtml" />
+    <Content Include="Views\AssetCategories\ListAssets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

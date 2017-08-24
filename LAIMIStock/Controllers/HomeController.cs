@@ -19,9 +19,9 @@ namespace LAIMIStock.Controllers
             foreach (var categoryAux in categoriesDb)
             {
                 categoriesList.Add(categoryAux);
-            }            
+            }
 
-            var viewModel = new ListCategoriesViewModel
+            var viewModel = new ListCategoriesSViewModel
             {
                 Categories = categoriesList
             };

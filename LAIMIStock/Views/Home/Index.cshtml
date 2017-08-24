@@ -1,14 +1,14 @@
-﻿@model LAIMIStock.ViewModels.ListCategoriesViewModel
+﻿@model LAIMIStock.ViewModels.ListCategoriesSViewModel
 @{
-    ViewBag.Title = "Inicio";
+    ViewBag.Title = "Categorías";
 }
 
-<h2>Categorías</h2>
+<h2>Categorías de Suministros</h2>
 
 <div class="img-grid">
     @foreach (var category in Model.Categories)
     {
-        <a href="@Url.Action("Index", "SupplyCategories", new {id = @category.idCategoriaSuministro})">
+        <a href="@Url.Action("ListSupplies", "SupplyCategories", new {id = @category.idCategoriaSuministro})">
             <img src="@category.imagenURL" height="168" width="168" class="img-item">
         </a>
     }

@@ -1,0 +1,17 @@
+﻿@model LAIMIStock.ViewModels.ListAssetsViewModel
+@{
+    ViewBag.Title = "Activos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Activos</h2>
+
+<ul>
+    @foreach (var asset in Model.Activos)
+    {
+        <li>@asset.descripcion</li>
+    }
+</ul>
+
+
+

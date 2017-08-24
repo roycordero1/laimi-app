@@ -8,20 +8,21 @@ using LAIMIStock.ViewModels;
 
 namespace LAIMIStock.Controllers
 {
-    public class SupplyCategoriesController : Controller
+    public class AssetCategoriesController : Controller
     {
+        // GET: AssetCategories
         public ActionResult Index()
         {
             laimistockappEntities db = new laimistockappEntities();
-            var categoriesDb = db.CategoriasSuministros.DefaultIfEmpty();
+            var categoriesDb = db.CategoriasActivos.DefaultIfEmpty();
 
-            var categoriesList = new List<CategoriasSuministros>();
+            var categoriesList = new List<CategoriasActivos>();
             foreach (var categoryAux in categoriesDb)
             {
                 categoriesList.Add(categoryAux);
             }
 
-            var viewModel = new ListCategoriesSViewModel
+            var viewModel = new ListCategoriesAViewModel()
             {
                 Categories = categoriesList
             };
@@ -29,26 +30,24 @@ namespace LAIMIStock.Controllers
             return View(viewModel);
         }
 
-        // GET: Categories
-        public ActionResult ListSupplies(int id)
+        public ActionResult ListAssets(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
-            var suppliesDb = db.Suministros.Where(x => x.idCategoria == id);
+            var assetsDb = db.Activos.Where(x => x.idCategoria == id);
 
 
-            var suppliesList = new List<Suministros>();
-            foreach (var supplyAux in suppliesDb)
+            var assetsList = new List<Activos>();
+            foreach (var assetAux in assetsDb)
             {
-                suppliesList.Add(supplyAux);
+                assetsList.Add(assetAux);
             }
 
-            var viewModel = new ListSuppliesViewModel()
+            var viewModel = new ListAssetsViewModel()
             {
-                Suministros = suppliesList
+                Activos = assetsList
             };
 
             return View(viewModel);
         }
-        
     }
 }
