@@ -23,11 +23,15 @@ namespace LAIMIStock
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/Content/js").Include(
+                      "~/Content/js/sort-table.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-lumen.css",
-                      "~/Content/layout.css",
-                      "~/Content/home.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/bootstrap-lumen.css",
+                      "~/Content/css/layout.css",
+                      "~/Content/css/home.css",
+                      "~/Content/css/site.css",
+                      "~/Content/css/tables.css"));            
         }
     }
 }

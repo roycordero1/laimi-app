@@ -1,0 +1,25 @@
+﻿table {
+    width: 100%;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 0.5px solid;
+    border-color: #000000 !important;
+    border-collapse: initial;
+}
+
+table th:hover {
+    cursor: pointer;
+}
+
+table th:after {
+    content: "";
+    display: inline-block;
+    float: right;
+    width: 15px;
+    height: 15px;
+    background: url(/Content/img/sort-arrows.png) no-repeat 30px 30px;
+    background-size: 15px 15px;
+    background-position: center;
+}

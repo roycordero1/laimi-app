@@ -6,12 +6,25 @@
 
 <h2>Activos</h2>
 
-<ul>
+<table id="myTable">
+    <tr>
+        <th onclick="sortTable(0)">Código</th>
+        <th onclick="sortTable(1)">Nombre</th>
+        <th onclick="sortTable(2)">Descripción</th>
+        <th onclick="sortTable(3)">Cantidad</th>
+        <th onclick="sortTable(4)">Precio</th>
+    </tr>
+
     @foreach (var asset in Model.Activos)
     {
-        <li>@asset.descripcion</li>
+        <tr>
+            <td>@asset.codigo</td>
+            <td>@asset.nombre</td>
+            <td>@asset.descripcion</td>
+            <td>@asset.precio</td>
+        </tr>
     }
-</ul>
+</table>
 
 
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LAIMI</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/js")
 
 </head>
 <body>
@@ -21,36 +21,38 @@
             </div>        
         </div>
     </div>
-
-    <ul class="nav nav-pills nav-stacked">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Suministros</a>
-            <ul class="dropdown-menu">
-                <li class="divider"></li>
-                <li>@Html.ActionLink("Buscar suministro", "Index", "SupplyCategories")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Activos</a>
-            <ul class="dropdown-menu">
-                <li class="divider"></li>
-                <li>@Html.ActionLink("Buscar activo", "Index", "AssetCategories")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes</a>
-            <ul class="dropdown-menu">
-                <li class="divider"></li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-                <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
-            </ul>
-        </li>
-    </ul>
+    
+    <div class="nav-sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Suministros</a>
+                <ul class="dropdown-menu">
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Buscar suministro", "Index", "SupplyCategories")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Activos</a>
+                <ul class="dropdown-menu">
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Buscar activo", "Index", "AssetCategories")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes</a>
+                <ul class="dropdown-menu">
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Undefined", "Index", "Home")</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
     <div class="container body-content">
         @RenderBody()

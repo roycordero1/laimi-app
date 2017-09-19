@@ -6,10 +6,26 @@
 
 <h2>Suministros</h2>
 
-<ul>
+<table id="myTable">
+    <tr>        
+        <th onclick="sortTable(0)">Código</th>
+        <th onclick="sortTable(1)">Nombre</th>
+        <th onclick="sortTable(2)">Descripción</th>
+        <th onclick="sortTable(3)">Cantidad</th>
+        <th onclick="sortTable(4)">Precio</th>
+    </tr>
+
     @foreach (var supply in Model.Suministros)
     {        
-        <li>@supply.descripcion</li>
+        <tr>
+            <td>@supply.codigo</td>
+            <td>@supply.nombre</td>
+            <td>@supply.descripcion</td>
+            <td>@supply.cantidad</td>
+            <td>@supply.precio</td>
+        </tr>
     }
-</ul>
+</table>
+
+
 
