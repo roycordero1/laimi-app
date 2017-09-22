@@ -32,9 +32,9 @@ namespace LAIMIStock.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -303,11 +303,11 @@ namespace LAIMIStock.Controllers
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider)
+        /*public ActionResult LinkLogin(string provider)
         {
             // Solicitar la redirección al proveedor de inicio de sesión externo para vincular un inicio de sesión para el usuario actual
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
+        }*/
 
         //
         // GET: /Manage/LinkLoginCallback
@@ -333,7 +333,7 @@ namespace LAIMIStock.Controllers
             base.Dispose(disposing);
         }
 
-#region Aplicaciones auxiliares
+        #region Aplicaciones auxiliares
         // Se usan para protección XSRF al agregar inicios de sesión externos
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +384,6 @@ namespace LAIMIStock.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

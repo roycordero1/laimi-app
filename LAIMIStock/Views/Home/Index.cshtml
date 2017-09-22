@@ -1,5 +1,9 @@
-﻿@model LAIMIStock.ViewModels.ListCategoriesSViewModel
+﻿﻿@model LAIMIStock.ViewModels.ListCategoriesSViewModel
 @{
+    if (Session["usuarioID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Categorías";
 }
 

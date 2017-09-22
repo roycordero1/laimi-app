@@ -206,7 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Activos.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
@@ -219,6 +219,7 @@
     <Compile Include="Models\CategoriasSuministros.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaimiStockAppDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -288,7 +289,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\layout.css" />
-    <Content Include="Content\css\loginStyle.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\img\sort-arrows.png" />
     <Content Include="Content\js\sort-table.js" />
     <Content Include="Content\css\tables.css" />
@@ -332,6 +333,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\ChangePassword.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

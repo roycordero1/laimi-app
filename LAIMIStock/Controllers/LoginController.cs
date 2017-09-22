@@ -25,19 +25,22 @@ namespace LAIMIStock.Controllers
 
                 if (userDetails == null)
                 {
-                    //userModel.LoginErrorMessage = "hola";
-
                     userModel.LoginErrorMessage = "Usuario o contraseña incorrectos";
-                    //System.Diagnostics.Debug.WriteLine(userModel.LoginErrorMessage);
                     return View("Index", userModel);
                 }
                 else
                 {
                     Session["usuarioID"] = userDetails.idUsuario;
+                    Session["nombre"] = userDetails.nombre;
                     return RedirectToAction("Index", "Home");
                 }
             }
 
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
         }
     }
 }
