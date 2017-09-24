@@ -7,31 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace LAIMIStock.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Usuarios
     {
-        [Key]
         public int idUsuario { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es obligatorio")]
         [StringLength(50)]
         public string nombre { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es obligatorio")]
         [StringLength(50)]
         [DataType(DataType.Password)]
         public string password { get; set; }
         public Nullable<int> idRol { get; set; }
         public Nullable<bool> isAdmin { get; set; }
-    
-        public virtual Roles Roles { get; set; }
 
         [NotMapped]
         public string LoginErrorMessage { get; set; }
+
+
+        public virtual Roles Roles { get; set; }
+
     }
 }
