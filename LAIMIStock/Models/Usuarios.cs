@@ -17,11 +17,11 @@ namespace LAIMIStock.Models
     public partial class Usuarios
     {
         public int idUsuario { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es obligatorio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de usuario es obligatorio")]
         [StringLength(50)]
         public string nombre { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es obligatorio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de contraseña es obligatorio")]
         [StringLength(50)]
         [DataType(DataType.Password)]
         public string password { get; set; }
@@ -31,8 +31,20 @@ namespace LAIMIStock.Models
         [NotMapped]
         public string LoginErrorMessage { get; set; }
 
-
+        [NotMapped]
+        public string UpdatePasswordErrorMessage { get; set; }
         public virtual Roles Roles { get; set; }
+
+        [NotMapped]
+        [Required(ErrorMessage = "El campo de nueva contraseña es obligatorio")]
+        [DataType(DataType.Password)]
+        public string newPassword { get; set; }
+
+        [NotMapped]
+        [Required(ErrorMessage = "El campo de confirmación de contraseña es obligatorio")]
+        [Compare("newPassword", ErrorMessage = "Las contraseñas no coinciden")]
+        [DataType(DataType.Password)]
+        public string confirmPassword { get; set; }
 
     }
 }
