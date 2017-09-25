@@ -6,25 +6,33 @@
 
 <h2>Activos</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Cantidad</th>
-        <th onclick="sortTable(4)">Precio</th>
-    </tr>
+@if (Model.Activos.Count > 0)
+{
 
-    @foreach (var asset in Model.Activos)
-    {
+    <table id="myTable">
         <tr>
-            <td>@asset.codigo</td>
-            <td>@asset.nombre</td>
-            <td>@asset.descripcion</td>
-            <td>@asset.precio</td>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Cantidad</th>
+            <th onclick="sortTable(4)">Precio</th>
         </tr>
-    }
-</table>
+
+        @foreach (var asset in Model.Activos)
+        {
+            <tr>
+                <td>@asset.codigo</td>
+                <td>@asset.nombre</td>
+                <td>@asset.descripcion</td>
+                <td>@asset.precio</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún activo de esta categoría!</h4>
+}
 
 
 

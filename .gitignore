@@ -241,8 +241,7 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-#custumIgnore
-LAIMIStock/LAIMIStock.csproj
+# Custom ignore
 LAIMIStock/Web.config
 LAIMIStock/Models/LaimiStockAppDB.Context.cs
 LAIMIStock/Models/LaimiStockAppDB.Designer.cs

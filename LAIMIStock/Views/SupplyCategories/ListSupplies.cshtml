@@ -6,26 +6,32 @@
 
 <h2>Suministros</h2>
 
-<table id="myTable">
-    <tr>        
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Cantidad</th>
-        <th onclick="sortTable(4)">Precio</th>
-    </tr>
-
-    @foreach (var supply in Model.Suministros)
-    {        
+@if (Model.Suministros.Count > 0)
+{
+    <table id="myTable">
         <tr>
-            <td>@supply.codigo</td>
-            <td>@supply.nombre</td>
-            <td>@supply.descripcion</td>
-            <td>@supply.cantidad</td>
-            <td>@supply.precio</td>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Cantidad</th>
+            <th onclick="sortTable(4)">Precio</th>
         </tr>
-    }
-</table>
 
+        @foreach (var supply in Model.Suministros)
+        {        
+            <tr>
+                <td>@supply.codigo</td>
+                <td>@supply.nombre</td>
+                <td>@supply.descripcion</td>
+                <td>@supply.cantidad</td>
+                <td>@supply.precio</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún suministro de esta categoría!</h4>
+}
 
 
