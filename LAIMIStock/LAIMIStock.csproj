@@ -219,7 +219,6 @@
     <Compile Include="Models\CategoriasSuministros.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaimiStockAppDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -256,12 +255,6 @@
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectUsuarios_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suministros.cs">
@@ -333,7 +326,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\ChangePassword.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -374,6 +366,7 @@
     <Content Include="Views\AssetCategories\Index.cshtml" />
     <Content Include="Views\SupplyCategories\Index.cshtml" />
     <Content Include="Views\AssetCategories\ListAssets.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
