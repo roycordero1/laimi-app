@@ -24,13 +24,13 @@ namespace LAIMIStock.Controllers
                 
                 if (userDetails == null)
                 {
-                    System.Diagnostics.Debug.WriteLine("Estoy vacío");
+                    //System.Diagnostics.Debug.WriteLine("Estoy vacío");
                     userModel.UpdatePasswordErrorMessage = "La contraseña no corresponde al usuario";
                     return View();
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Entré al else");
+                    //sSystem.Diagnostics.Debug.WriteLine("Entré al else");
                     userDetails.password = userModel.newPassword;
                     try
                     {
