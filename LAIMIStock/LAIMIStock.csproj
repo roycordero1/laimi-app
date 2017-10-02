@@ -257,6 +257,12 @@
     <Compile Include="Models\selectUsuarios_Result.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Suministros.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
@@ -326,7 +332,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
