@@ -282,7 +282,6 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\layout.css" />
-    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\loginStyle.css" />
     <Content Include="Content\img\sort-arrows.png" />
     <Content Include="Content\js\sort-table.js" />
@@ -368,6 +367,7 @@
     <Content Include="Views\SupplyCategories\Index.cshtml" />
     <Content Include="Views\AssetCategories\ListAssets.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Operator\OperadorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

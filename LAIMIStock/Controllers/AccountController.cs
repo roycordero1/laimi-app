@@ -19,19 +19,19 @@ namespace LAIMIStock.Controllers
         {
             using (laimistockappEntities db = new laimistockappEntities())
             {
-                var userDetails = db.Usuarios.Where(x => x.nombre == "Humberto" && x.password == userModel.password).FirstOrDefault();
+                var userDetails = db.Usuarios.Where(x => x.nombre == userModel.nombre && x.password == userModel.password).FirstOrDefault();
                 
                 
                 if (userDetails == null)
                 {
                     //System.Diagnostics.Debug.WriteLine("Estoy vacío");
                     userModel.UpdatePasswordErrorMessage = "La contraseña no corresponde al usuario";
-                    return View();
+                    return View("ChangePassword", userModel);
                 }
                 else
                 {
-                    //sSystem.Diagnostics.Debug.WriteLine("Entré al else");
                     userDetails.password = userModel.newPassword;
+                    userDetails.nombre = userModel.nombre;
                     try
                     {
                         db.Configuration.ValidateOnSaveEnabled = false;
@@ -54,7 +54,7 @@ namespace LAIMIStock.Controllers
                         }
                         throw raise;
                     }
-                    return View();
+                    return View("ChangePassword");
                 }
                 
             }

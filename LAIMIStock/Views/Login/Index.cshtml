@@ -4,6 +4,10 @@
 }
 
 @{
+    if (Session["usuarioID"] != null)
+    {
+        Response.Redirect("~/Home");
+    }
     Layout = null;
 }
 

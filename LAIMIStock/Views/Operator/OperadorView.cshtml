@@ -1,35 +1,35 @@
-﻿﻿@model LAIMIStock.Models.Usuarios
+﻿
+﻿@model LAIMIStock.Models.Suministros
 
 @{
     if (Session["usuarioID"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
-    ViewBag.Title = "ChangePassword";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    List<SelectListItem> list = new List<SelectListItem>();
+    Layout = null;
 }
 
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>LAIMI - Cambiar contraseña</title>
-    
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
-          rel="stylesheet" type='text/css'>
+    <meta name="viewport" content="width=device-width" />
+    <title>Consumo de suministros</title>
 </head>
 <body>
 
 
 
-    @using (Html.BeginForm("UpdatePassword", "Account", FormMethod.Post))
+    @using (Html.BeginForm("UseSupply", "SupplyCategories", FormMethod.Post))
     {
         <div class="container">
             <form className="zp-account-form">
-                <h1 class="zp-sign-in--tittle">Cambio de contraseña</h1>
+                <h1 class="zp-sign-in--tittle">Consumir suministro</h1>
                 <div class="form-input">
 
-                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { placeholder = "Contraseña actual" } })
+                    @Html.DropDownList("Supplies", )
                     <br />
                     @Html.ValidationMessageFor(model => model.password)
 
@@ -57,15 +57,15 @@
                     @Html.LabelFor(model => model.nombre, "Operador")
                 </div>
 
-                    <div class="group">
-                        <label class="field-validation-error">@Html.DisplayFor(model => model.UpdatePasswordErrorMessage)</label>
-                    </div>
+                <div class="group">
+                    <label class="field-validation-error">@Html.DisplayFor(model => model.UpdatePasswordErrorMessage)</label>
+                </div>
 
-                    <button type="submit" class="btn-success">
-                        CAMBIAR
-                        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                    </button>
-</form>
+                <button type="submit" class="btn-success">
+                    CAMBIAR
+                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                </button>
+            </form>
         </div>
 
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -74,3 +74,4 @@
     }
 </body>
 </html>
+

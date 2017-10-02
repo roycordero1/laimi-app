@@ -49,6 +49,12 @@ namespace LAIMIStock.Controllers
 
             return View(viewModel);
         }
+
+        public ActionResult UseSupply()
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            return View();
+        }
         
     }
 }
