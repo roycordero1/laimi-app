@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Escoja si quiere agregar una categoría o un suministro de una categoría existente</h4>
+
+@Html.ActionLink("Nueva categoría", "AddCategoryForm", "SupplyCategories", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Nuevo suministro", "AddSupplyForm", "SupplyCategories", new { area = "" }, new { @class = "btn btn-primary" })

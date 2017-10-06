@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Escoja si quiere agregar una categoría o un activo de una categoría existente</h4>
+
+@Html.ActionLink("Nueva categoría", "AddCategoryForm", "AssetCategories", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Nuevo activo", "AddAssetForm", "AssetCategories", new { area = "" }, new { @class = "btn btn-primary" })

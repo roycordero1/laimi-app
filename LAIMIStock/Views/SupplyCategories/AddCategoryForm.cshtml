@@ -1,0 +1,19 @@
+﻿@model LAIMIStock.Models.CategoriasSuministros
+@{
+    ViewBag.Title = "Nueva categoría";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Agregue una categoría</h3>
+
+@using (Html.BeginForm("AddCategory", "SupplyCategories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label for="nombre">Nombre</label>
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    <label for="descripcion">Descripción</label>
+    @Html.TextBoxFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
+    <label for="file">Imagen</label>
+    <input type="file" name="file" id="file" title="Agregue una imagen" />    
+    <input type="submit" value="Agregar" class="btn btn-primary" />
+}
+

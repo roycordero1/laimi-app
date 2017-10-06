@@ -13,9 +13,13 @@
         <tr>
             <th onclick="sortTable(0)">Código</th>
             <th onclick="sortTable(1)">Nombre</th>
-            <th onclick="sortTable(2)">Descripción</th>
-            <th onclick="sortTable(3)">Cantidad</th>
-            <th onclick="sortTable(4)">Precio</th>
+            <th onclick="sortTable(2)">Descripción</th>            
+            <th onclick="sortTable(3)">Precio</th>
+            <th onclick="sortTable(4)">Ingreso</th>
+            <th onclick="sortTable(5)">Expiración</th>
+            <th onclick="sortTable(6)">Localización</th>
+            <th onclick="sortTable(7)">Estado</th>
+            <th></th>
         </tr>
 
         @foreach (var asset in Model.Activos)
@@ -25,6 +29,15 @@
                 <td>@asset.nombre</td>
                 <td>@asset.descripcion</td>
                 <td>@asset.precio</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", @asset.fechaIngreso)</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", @asset.fechaExpiracion)</td>
+                <td>@asset.localizacion</td>
+                <td>@asset.estado</td>
+                <td style="text-align: center;">
+                    <a href="/AssetCategories/EditSupplyForm/@asset.idActivo">
+                        <img src="/Content/img/edit-icon.jpg" style="height: 15px; width: 15px;" />
+                    </a>
+                </td>
             </tr>
         }
     </table>

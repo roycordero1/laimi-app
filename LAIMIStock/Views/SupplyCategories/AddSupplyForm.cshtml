@@ -1,0 +1,24 @@
+﻿@model LAIMIStock.Models.Suministros
+@{
+    ViewBag.Title = "Nuevo suministro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Agregue un suministro</h3>
+
+@using (Html.BeginForm("AddSupply", "SupplyCategories", FormMethod.Post))
+{
+    <label for="codigo">Código</label>
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo" })
+    <label for="nombre">Nombre</label>
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    <label for="descripcion">Descripción</label>
+    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
+    <label for="precio">Precio</label>
+    @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @id = "precio" })
+    <label for="categoria">Categoría</label>
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
+
+    <input type="submit" value="Agregar" class="btn btn-primary" />
+}
+

@@ -1,0 +1,19 @@
+﻿@model LAIMIStock.Models.Suministros
+@{
+    ViewBag.Title = "Editar suministro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edite el suministro</h2>
+
+@using (Html.BeginForm("EditSupply", "SupplyCategories", new { @idSuministro = Model.idSuministro }, FormMethod.Post))
+{    
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @placeholder = "Código" })
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @placeholder = "Nombre" })
+    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @placeholder = "Descripcion" })
+    @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @placeholder = "Precio" })
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "-Seleccione-", new { @class = "form-control" })
+
+    <input type="submit" value="Editar" class="btn btn-primary" />
+}
+

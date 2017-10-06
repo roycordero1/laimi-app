@@ -31,7 +31,8 @@ namespace LAIMIStock
                       "~/Content/css/layout.css",
                       "~/Content/css/home.css",
                       "~/Content/css/site.css",
-                      "~/Content/css/tables.css"));            
+                      "~/Content/css/tables.css",
+                      "~/Content/css/forms.css"));
         }
     }
 }

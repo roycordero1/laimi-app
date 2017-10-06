@@ -286,6 +286,7 @@
     <Content Include="Content\css\bootstrap-lumen.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\forms.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\loginStyle.css" />
@@ -368,7 +369,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\SupplyCategories\Random.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\SupplyCategories\ListSupplies.cshtml" />
     <Content Include="Views\AssetCategories\Index.cshtml" />
@@ -376,6 +376,14 @@
     <Content Include="Views\AssetCategories\ListAssets.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Operator\OperadorView.cshtml" />
+    <Content Include="Views\SupplyCategories\AddCategoryForm.cshtml" />
+    <Content Include="Views\SupplyCategories\ChooseAddType.cshtml" />
+    <Content Include="Views\SupplyCategories\AddSupplyForm.cshtml" />
+    <Content Include="Views\AssetCategories\ChooseAddType.cshtml" />
+    <Content Include="Views\AssetCategories\AddCategoryForm.cshtml" />
+    <Content Include="Views\AssetCategories\AddAssetForm.cshtml" />
+    <Content Include="Views\SupplyCategories\EditSupplyForm.cshtml" />
+    <Content Include="Views\AssetCategories\EditAssetForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

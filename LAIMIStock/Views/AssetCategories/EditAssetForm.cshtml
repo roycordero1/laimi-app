@@ -1,0 +1,21 @@
+﻿@model LAIMIStock.Models.Activos
+@{
+    ViewBag.Title = "Editar activo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edite el activo</h2>
+
+@using (Html.BeginForm("EditAsset", "AssetCategories", new { @idActivo = Model.idActivo }, FormMethod.Post))
+{    
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @placeholder = "Código" })
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @placeholder = "Nombre" })
+    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @placeholder = "Descripcion" })
+    @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @placeholder = "Precio" })
+    @Html.TextBoxFor(model => model.fechaExpiracion, new { @class = "form-control datecontrol", @placeholder = "Fecha de caducidad", @type = "date" })
+    @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @placeholder = "Localización" })
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "-Seleccione-", new { @class = "form-control" })
+
+    <input type="submit" value="Editar" class="btn btn-primary" />
+}
+

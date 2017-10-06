@@ -1,0 +1,28 @@
+﻿@model LAIMIStock.Models.Activos
+@{
+    ViewBag.Title = "Nuevo activo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Agregue un activo</h3>
+
+@using (Html.BeginForm("AddAsset", "AssetCategories", FormMethod.Post))
+{
+    <label for="codigo">Código</label>
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo" })
+    <label for="nombre">Nombre</label>
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    <label for="descripcion">Descripción</label>
+    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
+    <label for="precio">Precio</label>
+    @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @id = "precio" })
+    <label for="fecha-caducidad">Fecha de caducidad</label>
+    @Html.TextBoxFor(model => model.fechaExpiracion, new { @class = "form-control datecontrol", @placeholder = "fecha-caducidad", @type = "date" })
+    <label for="localizacion">Localización</label>
+    @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
+    <label for="categoria">Categoría</label>
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
+
+    <input type="submit" value="Agregar" class="btn btn-primary" />
+}
+
