@@ -2,12 +2,11 @@
 ﻿@model LAIMIStock.Models.Suministros
 
 @{
-    if (Session["usuarioID"] == null)
+    if (Convert.ToInt32(Session["usuarioID"]) != 2)
     {
         Response.Redirect("~/Login/Index");
     }
-    ViewBag.Title = "Index";
-    List<SelectListItem> list = new List<SelectListItem>();
+    ViewBag.Title = "OperadorView";
     Layout = null;
 }
 
@@ -22,47 +21,23 @@
 
 
 
-    @using (Html.BeginForm("UseSupply", "SupplyCategories", FormMethod.Post))
+    @using (Html.BeginForm("UseSupply", "Operator", FormMethod.Post))
     {
         <div class="container">
             <form className="zp-account-form">
                 <h1 class="zp-sign-in--tittle">Consumir suministro</h1>
                 <div class="form-input">
-
-                    @Html.DropDownList("Supplies", )
+                    
+                    @Html.DropDownList("Supply", "Seleccione un suministro")
+                    
                     <br />
-                    @Html.ValidationMessageFor(model => model.password)
-
+                    
                 </div>
 
 
-                <div class="form-input">
-                    @Html.EditorFor(model => model.newPassword, new { htmlAttributes = new { placeholder = "Contraseña nueva" } })
-                    <br />
-                    @Html.ValidationMessageFor(model => model.newPassword)
-
-                </div>
-
-                <div class="form-input">
-                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { placeholder = "Confirmar Contraseña" } })
-                    <br />
-                    @Html.ValidationMessageFor(model => model.confirmPassword)
-
-                </div>
-
-                <div class="form-input">
-                    @Html.RadioButtonFor(model => model.nombre, "Administrador", new { @checked = "checked" })
-                    @Html.LabelFor(model => model.nombre, "Administrador")
-                    @Html.RadioButtonFor(model => model.nombre, "Operador")
-                    @Html.LabelFor(model => model.nombre, "Operador")
-                </div>
-
-                <div class="group">
-                    <label class="field-validation-error">@Html.DisplayFor(model => model.UpdatePasswordErrorMessage)</label>
-                </div>
 
                 <button type="submit" class="btn-success">
-                    CAMBIAR
+                    CONSUMIR
                     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                 </button>
             </form>

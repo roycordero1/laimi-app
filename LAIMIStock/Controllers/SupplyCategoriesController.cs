@@ -168,12 +168,6 @@ namespace LAIMIStock.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public ActionResult UseSupply()
-        {
-            laimistockappEntities db = new laimistockappEntities();
-            return View();
-        }
     
     }
 }

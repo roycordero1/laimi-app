@@ -11,7 +11,9 @@ namespace LAIMIStock.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Suministros
     {
         public string codigo { get; set; }
@@ -27,5 +29,6 @@ namespace LAIMIStock.Models
         public string nombre { get; set; }
     
         public virtual CategoriasSuministros CategoriasSuministros { get; set; }
+
     }
 }
