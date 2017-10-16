@@ -45,6 +45,5 @@ namespace LAIMIStock.Models
         [Compare("newPassword", ErrorMessage = "Las contraseñas no coinciden")]
         [DataType(DataType.Password)]
         public string confirmPassword { get; set; }
-
     }
 }
