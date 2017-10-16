@@ -32,7 +32,15 @@ namespace LAIMIStock.Controllers
                 {
                     Session["usuarioID"] = userDetails.idUsuario;
                     Session["nombre"] = userDetails.nombre;
-                    return RedirectToAction("Index", "Home");
+                    if (Convert.ToInt32(Session["usuarioID"]) == 2)
+                    {
+                        return RedirectToAction("OperadorView", "Operator");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
                 }
             }
 

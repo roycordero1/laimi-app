@@ -24,7 +24,6 @@ namespace LAIMIStock.Controllers
                 
                 if (userDetails == null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("Estoy vacío");
                     userModel.UpdatePasswordErrorMessage = "La contraseña no corresponde al usuario";
                     return View("ChangePassword", userModel);
                 }
@@ -36,6 +35,7 @@ namespace LAIMIStock.Controllers
                     {
                         db.Configuration.ValidateOnSaveEnabled = false;
                         db.SaveChanges();
+                        
                     }
                     catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                     {
@@ -54,6 +54,7 @@ namespace LAIMIStock.Controllers
                         }
                         throw raise;
                     }
+                    TempData["msg"] = "<script>alert('Contraseña cambiada con éxito');</script>";
                     return View("ChangePassword");
                 }
                 

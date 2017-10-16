@@ -1,40 +1,74 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using LAIMIStock.Models;
-using LAIMIStock.ViewModels;
+
 
 namespace LAIMIStock.Controllers
 {
     public class OperatorController : Controller
     {
         // GET: Operator
-        public ActionResult OperadorView()
+        public ActionResult OperadorView(Suministros supply)
         {
             laimistockappEntities db = new laimistockappEntities();
-            IEnumerable<SelectListItem> supplies = db.Suministros.Select(x => new SelectListItem
+            supply.supplies = db.Suministros.Select(x => new SelectListItem
             {
                 Value = x.codigo,
                 Text = x.nombre
             });
-            ViewBag.Supply = supplies;
 
-            return View();
+            int SelectedValue = supply.selectedSupply;
+
+            if (SelectedValue != 0)
+            {
+                var valoresSuministro = db.Suministros.Where(x => x.idSuministro == SelectedValue).FirstOrDefault();
+                if (valoresSuministro != null)
+                {
+                    supply.cantidad = valoresSuministro.cantidad;
+                }
+                else
+                {
+                    //Response.Write("<script>alert(" + SelectedValue + ")</script>");
+                }
+                
+            }
+
+            return View(supply);
         }
 
-        public ActionResult loadAvailableAmount (Suministros supply)
+        [HttpPost]
+        public ActionResult UseSupply(Suministros supply)
         {
             laimistockappEntities db = new laimistockappEntities();
-            //var cantidad = db.Suministros.Select();
-            return View("OperadorView", supply);
-        }
 
-        public ActionResult UseSupply(Suministros supplyModel)
-        {
-            laimistockappEntities db = new laimistockappEntities();
-            return View();
+            int SelectedValueId = supply.selectedSupply;
+            
+
+            if (SelectedValueId != 0)
+            {
+                var valoresSuministro = db.Suministros.Where(x => x.idSuministro == SelectedValueId).FirstOrDefault();
+                if (valoresSuministro != null)
+                {
+                    valoresSuministro.cantidad = valoresSuministro.cantidad - 1;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    TempData["msg"] = "<script>alert('Consumo exitoso');</script>";
+                }
+                else
+                {
+                    
+                    Response.Write("<script>alert(No hay suficiente suministros para consumir)</script>");
+                }
+
+                return RedirectToAction("OperadorView", "Operator");
+
+            }
+            else
+            {
+                return RedirectToAction("OperadorView", "Operator");
+            }
+
+            
         }
     }
 

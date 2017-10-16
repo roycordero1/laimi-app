@@ -4,9 +4,13 @@
 }
 
 @{
-    if (Session["usuarioID"] != null)
+    if (Convert.ToInt32(Session["usuarioID"]) == 1)
     {
         Response.Redirect("~/Home");
+    }
+    else if (Convert.ToInt32(Session["usuarioID"]) == 2)
+    {
+        Response.Redirect("~/Operator/OperadorView");
     }
     Layout = null;
 }

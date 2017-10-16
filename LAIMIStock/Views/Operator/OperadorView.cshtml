@@ -7,7 +7,7 @@
         Response.Redirect("~/Login/Index");
     }
     ViewBag.Title = "OperadorView";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -27,11 +27,17 @@
             <form className="zp-account-form">
                 <h1 class="zp-sign-in--tittle">Consumir suministro</h1>
                 <div class="form-input">
-                    
-                    @Html.DropDownList("Supply", "Seleccione un suministro")
-                    
+
+                    @Html.DropDownListFor(m => m.selectedSupply, Model.supplies, "Seleccione un suministro", new { onchange = @"
+                                           var from = document.forms[0];
+                                           form.action = 'OperadorView';
+                                           form.submit();" })
                     <br />
-                    
+                    <label>Cantidad disponible</label>
+                    <br />
+                    @Html.TextBoxFor(model => model.cantidad, new { disabled = "disabled" })
+                    <br />
+                    @Html.Raw(TempData["msg"])
                 </div>
 
 

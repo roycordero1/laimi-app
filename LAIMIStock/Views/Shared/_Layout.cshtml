@@ -22,6 +22,8 @@
         </div>
     </div>
     
+@if (Convert.ToInt32(Session["usuarioID"]) != 2)
+{
     <div class="nav-sidebar">
         <ul class="nav nav-pills nav-stacked">
             <li class="dropdown">
@@ -52,10 +54,11 @@
                 </ul>
             </li>
             <li class="dropdown">
-                @Html.ActionLink("Usuarios", "ChangePassword", "Account", null, new {@class = "dropdown-toggle"})
+                @Html.ActionLink("Usuarios", "ChangePassword", "Account", null, new { @class = "dropdown-toggle" })
             </li>
         </ul>
     </div>
+}
 
     <div class="container body-content">
         @RenderBody()
