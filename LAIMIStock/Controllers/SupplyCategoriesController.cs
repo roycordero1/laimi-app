@@ -168,6 +168,65 @@ namespace LAIMIStock.Controllers
 
             return RedirectToAction("Index");
         }
-    
+
+        public ActionResult RechargeSupplyForm(Suministros supply)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            supply.supplies = db.Suministros.Select(x => new SelectListItem
+            {
+                Value = x.codigo,
+                Text = x.nombre
+            });
+
+            int selectedValue = supply.selectedSupply;
+            if (selectedValue != 0)
+            {
+                var valoresSuministro = db.Suministros.Where(x => x.idSuministro == selectedValue).FirstOrDefault();
+                if (valoresSuministro != null)
+                {
+                    supply.cantidad = valoresSuministro.cantidad;
+                }
+                else
+                {
+                    //Response.Write("<script>alert(" + SelectedValue + ")</script>");
+                }
+
+            }
+
+            return View(supply);
+        }
+
+        [HttpPost]
+        public ActionResult RechargeSupply(Suministros supply)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            int selectedValueId = supply.selectedSupply;
+
+            if (selectedValueId != 0)
+            {
+                var supplyDB = db.Suministros.Where(x => x.idSuministro == selectedValueId).FirstOrDefault();
+                if (supplyDB != null)
+                {
+                    supplyDB.cantidad = supplyDB.cantidad + supply.cantidad;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    TempData["msg"] = "<script>alert('¡Recarga exitosa!');</script>";
+                }
+                else
+                {
+
+                    Response.Write("<script>alert(No hay suficiente suministros para consumir)</script>");
+                }
+
+                return RedirectToAction("RechargeSupplyForm", "SupplyCategories");
+
+            }
+            else
+            {
+                return RedirectToAction("RechargeSupplyForm", "SupplyCategories");
+            }
+
+        }
+
     }
 }

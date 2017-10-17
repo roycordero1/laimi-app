@@ -258,6 +258,12 @@
     <Compile Include="Models\selectUsuarios_Result.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Suministros.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
@@ -379,6 +385,7 @@
     <Content Include="Views\AssetCategories\AddAssetForm.cshtml" />
     <Content Include="Views\SupplyCategories\EditSupplyForm.cshtml" />
     <Content Include="Views\AssetCategories\EditAssetForm.cshtml" />
+    <Content Include="Views\SupplyCategories\RechargeSupplyForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

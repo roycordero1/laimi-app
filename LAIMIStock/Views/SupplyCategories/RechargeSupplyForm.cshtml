@@ -1,0 +1,31 @@
+﻿@model LAIMIStock.Models.Suministros
+@{
+    ViewBag.Title = "Recarga de suministros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Agregue un suministro</h3>
+
+@using (Html.BeginForm("RechargeSupply", "SupplyCategories", FormMethod.Post))
+{
+    <label for="supplies-dropdown">Suministro</label>
+    @Html.DropDownListFor(model => model.selectedSupply, Model.supplies, "Seleccione un suministro", new { @class = "form-control", @id = "supplies-dropdown", onchange = @"
+                                                                                                                                                var form = document.forms[0];
+                                                                                                                                                form.action = 'RechargeSupplyForm';
+                                                                                                                                                form.submit();" })
+    <br>
+    <p>La cantidad actual es de:</p><p style="font-size: 18px;">@Model.cantidad</p>
+
+    <label for="cantidad">Cantidad que desea agregar</label>
+    @Html.TextBoxFor(model => model.cantidad, new { @class = "form-control", @id = "cantidad", Value = 0 })
+
+    <br>
+    @Html.Raw(TempData["msg"])
+
+    <input type="submit" value="Agregar" class="btn btn-primary" />
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+}
