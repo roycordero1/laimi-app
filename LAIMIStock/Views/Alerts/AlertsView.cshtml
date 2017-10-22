@@ -1,0 +1,48 @@
+﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
+
+@{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+    ViewBag.Title = "AlertsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Alertas</h2>
+
+
+@if (ViewBag.alertsDetails != null)
+{
+
+    <table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Cantidad</th>
+            <th onclick="sortTable(4)">Precio</th>
+            <th></th>
+        </tr>
+
+        @foreach (var supply in ViewBag.alertsDetails)
+        {
+            <tr>
+                <td>@supply.codigo</td>
+                <td>@supply.nombre</td>
+                <td>@supply.descripcion</td>
+                <td>@supply.cantidad</td>
+                <td>@supply.precio</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ninguna alerta para suministros!</h4>
+}
+
+
+

@@ -3,13 +3,22 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-        @Html.AntiForgeryToken()
+        
 
         <ul class="nav navbar-nav navbar-right">
             <li>
                 @Html.ActionLink("Hola " + Session["nombre"] + "!", "Index", "Account")
-                
             </li>
+            @if (Convert.ToInt32(Session["usuarioID"]) != 2)
+            {
+            <li>
+
+                @{
+                    string alerts = Session["Alerts"].ToString();
+                }
+                @Html.ActionLink("Alertas" + ": " + alerts, "AlertsView", "Alerts")
+            </li>
+            }
             <li><a href=@Url.Action("LogOut", "Login")>Cerrar sesión</a></li>
         </ul>
     }

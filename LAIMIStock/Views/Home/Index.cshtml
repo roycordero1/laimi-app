@@ -1,6 +1,6 @@
 ﻿﻿@model LAIMIStock.ViewModels.ListCategoriesSViewModel
 @{
-    if (Session["usuarioID"] == null)
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
         Response.Redirect("~/Login/Index");
     }

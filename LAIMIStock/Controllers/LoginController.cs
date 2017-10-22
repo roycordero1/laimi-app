@@ -38,6 +38,8 @@ namespace LAIMIStock.Controllers
                     }
                     else
                     {
+                        var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+                        Session["Alerts"] = alerts.Count;
                         return RedirectToAction("Index", "Home");
                     }
                     

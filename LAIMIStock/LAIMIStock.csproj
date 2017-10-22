@@ -198,6 +198,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\AssetCategoriesController.cs" />
     <Compile Include="Controllers\OperatorController.cs" />
     <Compile Include="Controllers\SupplyCategoriesController.cs" />
@@ -386,6 +387,7 @@
     <Content Include="Views\SupplyCategories\EditSupplyForm.cshtml" />
     <Content Include="Views\AssetCategories\EditAssetForm.cshtml" />
     <Content Include="Views\SupplyCategories\RechargeSupplyForm.cshtml" />
+    <Content Include="Views\Alerts\AlertsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
