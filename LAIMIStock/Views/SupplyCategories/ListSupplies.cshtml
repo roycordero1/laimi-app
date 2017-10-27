@@ -13,8 +13,14 @@
             <th onclick="sortTable(0)">Código</th>
             <th onclick="sortTable(1)">Nombre</th>
             <th onclick="sortTable(2)">Descripción</th>
-            <th onclick="sortTable(3)">Cantidad</th>
-            <th onclick="sortTable(4)">Precio</th>
+            <th onclick="sortTable(3)">Ingreso</th>
+            <th onclick="sortTable(4)">Caducidad</th>
+            <th onclick="sortTable(5)">Precio</th>
+            <th onclick="sortTable(6)">Objeto gasto</th>
+            <th onclick="sortTable(7)">Localización</th>
+            <th onclick="sortTable(8)">Cantidad</th>
+            <th onclick="sortTable(9)">Mínima cantidad</th>            
+            <th></th>
             <th></th>
         </tr>
 
@@ -24,11 +30,21 @@
                 <td>@supply.codigo</td>
                 <td>@supply.nombre</td>
                 <td>@supply.descripcion</td>
-                <td>@supply.cantidad</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", @supply.fechaIngreso)</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", @supply.fechaCaducidad)</td>
                 <td>@supply.precio</td>
+                <td>@supply.objetoGasto</td>
+                <td>@supply.localizacion</td>
+                <td>@supply.cantidad</td>
+                <td>@supply.limiteSuministro</td>
                 <td style="text-align: center;">
-                    <a href="/SupplyCategories/EditSupplyForm/@supply.idSuministro">
-                        <img src="/Content/img/edit-icon.jpg" style="height: 15px; width: 15px;" />
+                    <a href="@Url.Action("EditSupplyForm", "SupplyCategories", new {id = @supply.idSuministro })">
+                        <img src="~/Content/img/edit-icon.jpg" style="height: 15px; width: 15px;" />
+                    </a>
+                </td>
+                <td style="text-align: center;">
+                    <a href="@Url.Action("DeleteSupplyForm", "SupplyCategories", new {id = @supply.idSuministro })">
+                        <img src="~/Content/img/delete-icon.jpg" style="height: 15px; width: 15px;" />
                     </a>
                 </td>
             </tr>

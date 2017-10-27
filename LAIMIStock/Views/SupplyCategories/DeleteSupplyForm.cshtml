@@ -1,0 +1,11 @@
+﻿@model LAIMIStock.Models.Suministros
+@{
+    ViewBag.Title = "Eliminar suministro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>¿Realmente desea eliminar el suministro @Model.nombre?</h4>
+
+@Html.ActionLink("Eliminar", "DeleteSupply", "SupplyCategories", new { @id = Model.idSuministro }, new { @class = "btn btn-danger" })
+@Html.ActionLink("Cancelar", "ListSupplies", "SupplyCategories", new { area = "" }, new { @class = "btn btn-primary" })
+

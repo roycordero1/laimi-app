@@ -1,0 +1,11 @@
+﻿@model LAIMIStock.Models.Activos
+@{
+    ViewBag.Title = "Eliminar activo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>¿Realmente desea eliminar el activo @Model.nombre?</h4>
+
+@Html.ActionLink("Eliminar", "DeleteAsset", "AssetCategories", new { @id = Model.idActivo }, new { @class = "btn btn-danger" })
+@Html.ActionLink("Cancelar", "ListAssets", "AssetCategories", new { area = "" }, new { @class = "btn btn-primary" })
+

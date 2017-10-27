@@ -29,7 +29,7 @@ namespace LAIMIStock.Controllers
 
             return View(viewModel);
         }
-        
+
         public ActionResult ListSupplies(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
@@ -68,13 +68,14 @@ namespace LAIMIStock.Controllers
                 laimistockappEntities db = new laimistockappEntities();
 
                 string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
+                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
                 file.SaveAs(path);
 
                 CategoriasSuministros category = new CategoriasSuministros
                 {
                     nombre = model.nombre,
                     descripcion = model.descripcion,
-                    imagenURL = "/Content/img/" + file.FileName
+                    imagenURL = baseUrl + "Content/img/" + file.FileName
                 };
 
                 db.CategoriasSuministros.Add(category);
@@ -103,19 +104,24 @@ namespace LAIMIStock.Controllers
 
             try
             {
-                laimistockappEntities db = new laimistockappEntities();                
+                laimistockappEntities db = new laimistockappEntities();
 
                 Suministros supply = new Suministros
                 {
                     codigo = model.codigo,
                     nombre = model.nombre,
                     descripcion = model.descripcion,
+                    fechaCaducidad = model.fechaCaducidad,
                     precio = model.precio,
-                    idCategoria = model.idCategoria
+                    objetoGasto = model.objetoGasto,
+                    localizacion = model.localizacion,
+                    cantidad = model.cantidad,
+                    limiteSuministro = model.limiteSuministro,
+                    idCategoria = model.idCategoria,
+                    fechaIngreso = System.DateTime.Now
                 };
 
                 db.Suministros.Add(supply);
-                db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -226,6 +232,26 @@ namespace LAIMIStock.Controllers
                 return RedirectToAction("RechargeSupplyForm", "SupplyCategories");
             }
 
+        }
+
+        public ActionResult DeleteSupplyForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
+
+            return View(supply);
+        }
+
+        public ActionResult DeleteSupply(int id)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+            Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
+
+            db.Suministros.Remove(supply);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }

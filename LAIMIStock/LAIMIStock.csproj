@@ -388,6 +388,8 @@
     <Content Include="Views\AssetCategories\EditAssetForm.cshtml" />
     <Content Include="Views\SupplyCategories\RechargeSupplyForm.cshtml" />
     <Content Include="Views\Alerts\AlertsView.cshtml" />
+    <Content Include="Views\SupplyCategories\DeleteSupplyForm.cshtml" />
+    <Content Include="Views\AssetCategories\DeleteAssetForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

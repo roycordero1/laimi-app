@@ -111,7 +111,7 @@ namespace LAIMIStock.Controllers
                     nombre = model.nombre,
                     descripcion = model.descripcion,
                     precio = model.precio,
-                    fechaIngreso = DateTime.Now,
+                    fechaIngreso = System.DateTime.Now,
                     fechaExpiracion = model.fechaExpiracion,
                     localizacion = model.localizacion,
                     estado = 1,
@@ -157,6 +157,7 @@ namespace LAIMIStock.Controllers
                     assetDB.precio != model.precio |
                     assetDB.fechaExpiracion != model.fechaExpiracion |
                     assetDB.localizacion != model.localizacion |
+                    assetDB.estado != model.estado |
                     assetDB.idCategoria != model.idCategoria)
                 {
                     assetDB.codigo = model.codigo;
@@ -165,6 +166,7 @@ namespace LAIMIStock.Controllers
                     assetDB.precio = model.precio;
                     assetDB.fechaExpiracion = model.fechaExpiracion;
                     assetDB.localizacion = model.localizacion;
+                    assetDB.estado = model.estado;
                     assetDB.idCategoria = model.idCategoria;
                     db.SaveChanges();
                 }
@@ -173,6 +175,26 @@ namespace LAIMIStock.Controllers
             {
                 throw ex;
             }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteAssetForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
+
+            return View(asset);
+        }
+
+        public ActionResult DeleteAsset(int id)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+            Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
+
+            db.Activos.Remove(asset);
+            db.SaveChanges();
 
             return RedirectToAction("Index");
         }

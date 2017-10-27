@@ -14,9 +14,19 @@
     @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
     <label for="descripcion">Descripción</label>
     @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
+    <label for="fecha-caducidad">Fecha de caducidad</label>
+    @Html.TextBoxFor(model => model.fechaCaducidad, new { @class = "form-control datecontrol", @type = "date", @id = "fecha-caducidad" })
     <label for="precio">Precio</label>
     @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @id = "precio" })
-    <label for="categoria">Suministro</label>
+    <label for="objeto-gasto">Objeto gasto</label>
+    @Html.TextBoxFor(model => model.objetoGasto, new { @class = "form-control", @id = "objeto-gasto", @type = "number" })
+    <label for="localizacion">Localizacion</label>
+    @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
+    <label for="cantidad">Cantidad</label>
+    @Html.TextBoxFor(model => model.cantidad, new { @class = "form-control", @id = "cantidad", @type = "number" })
+    <label for="limite">Límite mínimo de cantidad</label>
+    @Html.TextBoxFor(model => model.limiteSuministro, new { @class = "form-control", @id = "limite", @type = "number" })
+    <label for="categoria">Categoría</label>
     @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
 
     <input type="submit" value="Editar" class="btn btn-primary" />

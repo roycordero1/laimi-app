@@ -20,6 +20,7 @@
             <th onclick="sortTable(6)">Localización</th>
             <th onclick="sortTable(7)">Estado</th>
             <th></th>
+            <th></th>
         </tr>
 
         @foreach (var asset in Model.Activos)
@@ -34,8 +35,13 @@
                 <td>@asset.localizacion</td>
                 <td>@asset.estado</td>
                 <td style="text-align: center;">
-                    <a href="/AssetCategories/EditSupplyForm/@asset.idActivo">
-                        <img src="/Content/img/edit-icon.jpg" style="height: 15px; width: 15px;" />
+                    <a href="@Url.Action("EditAssetForm", "AssetCategories", new {id = @asset.idActivo })">
+                        <img src="~/Content/img/edit-icon.jpg" style="height: 15px; width: 15px;" />
+                    </a>
+                </td>
+                <td style="text-align: center;">
+                    <a href="@Url.Action("DeleteAssetForm", "AssetCategories", new {id = @asset.idActivo })">
+                        <img src="~/Content/img/delete-icon.jpg" style="height: 15px; width: 15px;" />
                     </a>
                 </td>
             </tr>
