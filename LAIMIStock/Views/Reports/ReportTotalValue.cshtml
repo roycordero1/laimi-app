@@ -1,0 +1,28 @@
+﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
+@{
+    ViewBag.Title = "ReportTotalValue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reporte Valor Total</h2>
+
+
+@if (ViewBag.TotalValue != null)
+{
+
+    <table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Valor Total</th>
+        </tr>
+
+        
+        <tr>
+            <td>@ViewBag.TotalValue</td>
+        </tr>
+        
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún valor total!</h4>
+}

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,19 +80,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -132,6 +133,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -201,6 +203,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\AssetCategoriesController.cs" />
     <Compile Include="Controllers\OperatorController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SupplyCategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -238,6 +241,18 @@
       <DependentUpon>LaimiStockAppDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\reportAmountInventary_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reportAssetState_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reportLog_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\reportSupplyConsuption_Result.cs">
+      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Roles.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
@@ -257,12 +272,6 @@
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectUsuarios_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suministros.cs">
@@ -390,6 +399,12 @@
     <Content Include="Views\Alerts\AlertsView.cshtml" />
     <Content Include="Views\SupplyCategories\DeleteSupplyForm.cshtml" />
     <Content Include="Views\AssetCategories\DeleteAssetForm.cshtml" />
+    <Content Include="Views\Reports\ReportTotalValue.cshtml" />
+    <Content Include="Views\Reports\ReportAmountInventory.cshtml" />
+    <Content Include="Views\Reports\ReportAssetsState.cshtml" />
+    <Content Include="Views\Reports\ReportBlog.cshtml" />
+    <Content Include="Views\Reports\ReportSuppliesPerLab.cshtml" />
+    <Content Include="Views\Reports\ReportSupplyConsuption.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
