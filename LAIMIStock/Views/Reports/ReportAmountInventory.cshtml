@@ -1,4 +1,4 @@
-﻿
+﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
 @{
     if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
@@ -10,21 +10,28 @@
 
 <h2>Reporte Cantidad de inventario</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Cantidad</th>
-    </tr>
-    @foreach (var supply in ViewBag.AmountInventory)
-    {
+@if (ViewBag.AmountInventory != null)
+{
+    <table id="myTable">
         <tr>
-            <td>@supply.code</td>
-            <td>@supply.name</td>
-            <td>@supply.description</td>
-            <td>@supply.amount</td>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Cantidad</th>
         </tr>
-    }
-</table>
+        @foreach (var supply in ViewBag.AmountInventory)
+        {
+            <tr>
+                <td>@supply.codigo</td>
+                <td>@supply.nombre</td>
+                <td>@supply.descripcion</td>
+                <td>@supply.cantidad</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún reporte para cantidad de inventario!</h4>
+}
 

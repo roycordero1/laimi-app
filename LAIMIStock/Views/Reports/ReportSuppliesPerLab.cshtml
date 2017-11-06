@@ -1,4 +1,4 @@
-﻿
+﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
 @{
     if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
@@ -10,13 +10,31 @@
 
 <h2>Reporte Suministros por laboratorio</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Cantidad</th>
-        <th onclick="sortTable(4)">Localización</th>
-    </tr>
-</table>
+@if (ViewBag.SupplyPerLab != null)
+{
+    <table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Cantidad</th>
+            <th onclick="sortTable(4)">Localización</th>
+        </tr>
+
+        @foreach (var supply in ViewBag.SupplyPerLab)
+        {
+            <tr>
+                <td>@supply.codigo</td>
+                <td>@supply.nombre</td>
+                <td>@supply.descripcion</td>
+                <td>@supply.cantidad</td>
+                <td>@supply.localizacion</td>
+            </tr>
+        }
+      </table>
+}
+else
+{
+    <h4>¡No existe ningún reporte para suministro por laboratorio!</h4>
+}
 

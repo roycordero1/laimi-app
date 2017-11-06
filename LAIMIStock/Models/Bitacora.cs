@@ -9,9 +9,11 @@
 
 namespace LAIMIStock.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel;
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Bitacora
     {
         public int idAccion { get; set; }
@@ -20,5 +22,19 @@ namespace LAIMIStock.Models
         public System.DateTime fecha { get; set; }
         public int idUsuario { get; set; }
         public int idTipoAccion { get; set; }
+
+        [NotMapped]
+        [DisplayName("Fecha de Inicio")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de fecha inicio es obligatorio")]
+        public DateTime fechaInicio { get; set; }
+
+        [NotMapped]
+        [DisplayName("Fecha Fin")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de fecha fin es obligatorio")]
+        public DateTime fechaFin { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿﻿@model IEnumerable<LAIMIStock.Models.Activos>
 @{
     if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
@@ -10,13 +10,30 @@
 
 <h2>Reporte Estado de Activos</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Estado</th>
-        <th onclick="sortTable(4)">Localización</th>
-    </tr>
-</table>
+@if (ViewBag.AssetsState != null)
+{
 
+    <table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Código</th>
+            <th onclick="sortTable(1)">Nombre</th>
+            <th onclick="sortTable(2)">Descripción</th>
+            <th onclick="sortTable(3)">Estado</th>
+            <th onclick="sortTable(4)">Localización</th>
+        </tr>
+        @foreach (var asset in ViewBag.AssetsState)
+        {
+            <tr>
+                <td>@asset.codigo</td>
+                <td>@asset.nombre</td>
+                <td>@asset.descripcion</td>
+                <td>@asset.estado</td>
+                <td>@asset.localizacion</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún reporte para estado de activos!</h4>
+}

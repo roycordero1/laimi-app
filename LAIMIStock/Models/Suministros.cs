@@ -28,12 +28,13 @@ namespace LAIMIStock.Models
         public Nullable<int> idCategoria { get; set; }
         public string nombre { get; set; }
         public int limiteSuministro { get; set; }
-    
+
         public virtual CategoriasSuministros CategoriasSuministros { get; set; }
 
         [NotMapped]
         public int selectedSupply { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem> supplies { get; set; }
+
     }
 }

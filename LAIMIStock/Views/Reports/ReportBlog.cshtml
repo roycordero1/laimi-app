@@ -10,9 +10,23 @@
 
 <h2>Reporte Bitácora</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Acción</th>
-        <th onclick="sortTable(1)">Fecha</th>
-    </tr>
-</table>
+@if (ViewBag.Log != null)
+{
+    <table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Acción</th>
+            <th onclick="sortTable(1)">Fecha</th>
+        </tr>
+        @foreach (var log in ViewBag.Log)
+        {
+            <tr>
+                <td>@log.nombre</td>
+                <td>@log.fecha</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>¡No existe ningún reporte para la bitácora!</h4>
+}

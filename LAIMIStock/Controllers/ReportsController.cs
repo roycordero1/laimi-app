@@ -15,8 +15,6 @@ namespace LAIMIStock.Controllers
         {
             laimistockappEntities db = new laimistockappEntities();
             var reportDetails = db.reportTotalSupply().FirstOrDefault();
-            //Debug.WriteLine("Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            Debug.WriteLine(reportDetails);
             ViewBag.TotalValue = reportDetails;
             return View();
         }
@@ -24,7 +22,7 @@ namespace LAIMIStock.Controllers
         public ActionResult ReportAmountInventory()
         {
             laimistockappEntities db = new laimistockappEntities();
-            var reportDetails = db.reportTotalSupply().ToList();
+            var reportDetails = db.Suministros.ToList();
             ViewBag.AmountInventory = reportDetails;
             return View();
 
@@ -32,22 +30,39 @@ namespace LAIMIStock.Controllers
 
         public ActionResult ReportAssetsState()
         {
+            laimistockappEntities db = new laimistockappEntities();
+            var reportDetails = db.Activos.ToList();
+            ViewBag.AssetsState = reportDetails;
             return View();
         }
 
         public ActionResult ReportBlog()
         {
+            laimistockappEntities db = new laimistockappEntities();
+            var reportDetails = db.Bitacora.ToList();
+            ViewBag.Log = reportDetails;
             return View();
         }
 
         public ActionResult ReportSuppliesPerLab()
         {
+            laimistockappEntities db = new laimistockappEntities();
+            var reportDetails = db.Suministros.ToList();
+            ViewBag.SupplyPerLab = reportDetails;
             return View();
         }
 
         public ActionResult ReportSupplyConsuption()
         {
             return View();
+        }
+
+        public ActionResult GenerateReport()
+        {
+            laimistockappEntities db = new laimistockappEntities();
+            var reportDetails = db.Bitacora.Where(x => x.fecha >= x.fechaInicio && x.fecha <= x.fechaFin);
+            ViewBag.ConsumoSuministro = reportDetails;
+            return View("ReportSupplyConsuption");
         }
     }
 }

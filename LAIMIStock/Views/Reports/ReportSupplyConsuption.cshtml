@@ -1,4 +1,5 @@
-﻿@{
+﻿﻿@model LAIMIStock.Models.Bitacora
+@{
     if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
         Response.Redirect("~/Login/Index");
@@ -9,12 +10,49 @@
 
 <h2>Reporte de Consumo Suministro</h2>
 
-<table id="myTable">
-    <tr>
-        <th onclick="sortTable(0)">Código</th>
-        <th onclick="sortTable(1)">Nombre</th>
-        <th onclick="sortTable(2)">Descripción</th>
-        <th onclick="sortTable(3)">Cantidad</th>
-    </tr>
-</table>
+@using (Html.BeginForm("GenerateReport", "Reports", FormMethod.Post))
+{
 
+    @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col">
+        @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => model.fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col">
+        @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn-consultar">
+        CONSULTAR
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+
+        if (ViewBag.ConsumoSuministro != null)
+        {
+            <table id="myTable">
+                <tr>
+                    <th onclick="sortTable(0)">Código</th>
+                    <th onclick="sortTable(1)">Nombre</th>
+                    <th onclick="sortTable(2)">Descripción</th>
+                    <th onclick="sortTable(3)">Cantidad</th>
+                </tr>
+            </table>
+            foreach (var supply in ViewBag.ConsumoSuministro)
+            {
+                <tr>
+                    <td>supply.codigo</td>
+                    <td>supply.nombre</td>
+                    <td>supply.descripcion</td>
+                    
+                </tr>
+            }
+        }
+    else
+    {
+
+    }
+
+}
