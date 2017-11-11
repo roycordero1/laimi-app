@@ -61,6 +61,7 @@ namespace LAIMIStock.Controllers
         {
             laimistockappEntities db = new laimistockappEntities();
             var reportDetails = db.Bitacora.Where(x => x.fecha >= x.fechaInicio && x.fecha <= x.fechaFin);
+            Debug.WriteLine(reportDetails);
             ViewBag.ConsumoSuministro = reportDetails;
             return View("ReportSupplyConsuption");
         }
