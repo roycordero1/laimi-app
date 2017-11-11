@@ -99,35 +99,30 @@ namespace LAIMIStock.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult AddSupply(Suministros model)
         {
 
-            try
-            {
-                laimistockappEntities db = new laimistockappEntities();
+            laimistockappEntities db = new laimistockappEntities();
 
-                Suministros supply = new Suministros
-                {
-                    codigo = model.codigo,
-                    nombre = model.nombre,
-                    descripcion = model.descripcion,
-                    fechaCaducidad = model.fechaCaducidad,
-                    precio = model.precio,
-                    objetoGasto = model.objetoGasto,
-                    localizacion = model.localizacion,
-                    cantidad = model.cantidad,
-                    limiteSuministro = model.limiteSuministro,
-                    idCategoria = model.idCategoria,
-                    fechaIngreso = System.DateTime.Now
-                };
-
-                db.Suministros.Add(supply);
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
+            Suministros supply = new Suministros
             {
-                throw ex;
-            }
+                codigo = model.codigo,
+                nombre = model.nombre,
+                descripcion = model.descripcion,
+                fechaCaducidad = model.fechaCaducidad,
+                precio = model.precio,
+                objetoGasto = model.objetoGasto,
+                localizacion = model.localizacion,
+                cantidad = model.cantidad,
+                limiteSuministro = model.limiteSuministro,
+                idCategoria = model.idCategoria,
+                fechaIngreso = System.DateTime.Now
+            };
+
+            db.Suministros.Add(supply);
+            db.Configuration.ValidateOnSaveEnabled = false;
+            db.SaveChanges();
 
             return RedirectToAction("Index");
         }
