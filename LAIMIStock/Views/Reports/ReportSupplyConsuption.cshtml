@@ -28,31 +28,28 @@
     <button type="submit" class="btn-consultar">
         CONSULTAR
         <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-    </button>
-
-        if (ViewBag.ConsumoSuministro != null)
+    </button><br/>
+        
+        @if (@ViewBag.ConsumoSuministro != null)
         {
             <table id="myTable">
                 <tr>
-                    <th onclick="sortTable(0)">Código</th>
-                    <th onclick="sortTable(1)">Nombre</th>
-                    <th onclick="sortTable(2)">Descripción</th>
-                    <th onclick="sortTable(3)">Cantidad</th>
+                    <th onclick="sortTable(0)">Nombre</th>
+                    <th onclick="sortTable(1)">Fecha</th>
                 </tr>
-            </table>
-            foreach (var supply in ViewBag.ConsumoSuministro)
+            
+            @foreach (var supply in @ViewBag.ConsumoSuministro)
             {
-                <tr>
-                    <td>supply.codigo</td>
-                    <td>supply.nombre</td>
-                    <td>supply.descripcion</td>
-                    
+                <tr>     
+                    <td>@supply.nombre</td>
+                    <td>@supply.fecha</td>                 
                 </tr>
             }
+            </table>
         }
     else
     {
-
+        <h4>¡No existe ningún reporte para esa fecha!</h4>
     }
 
 }

@@ -39,7 +39,7 @@ namespace LAIMIStock.Controllers
         public ActionResult ReportBlog()
         {
             laimistockappEntities db = new laimistockappEntities();
-            var reportDetails = db.Bitacora.ToList();
+            var reportDetails = db.Bitacora.Where(x => x.idTipoAccion != 8).ToList();
             ViewBag.Log = reportDetails;
             return View();
         }
@@ -57,12 +57,13 @@ namespace LAIMIStock.Controllers
             return View();
         }
 
-        public ActionResult GenerateReport()
+        public ActionResult GenerateReport(Bitacora bitacoraModel)
         {
             laimistockappEntities db = new laimistockappEntities();
-            var reportDetails = db.Bitacora.Where(x => x.fecha >= x.fechaInicio && x.fecha <= x.fechaFin);
-            Debug.WriteLine(reportDetails);
+            //Debug.WriteLine();
+            var reportDetails = db.Bitacora.Where(x => x.fecha >= bitacoraModel.fechaInicio && x.fecha <= bitacoraModel.fechaFin && x.idTipoAccion == 8).ToList();
             ViewBag.ConsumoSuministro = reportDetails;
+
             return View("ReportSupplyConsuption");
         }
     }

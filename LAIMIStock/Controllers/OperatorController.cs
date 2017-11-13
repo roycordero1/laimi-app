@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using LAIMIStock.Models;
 
@@ -53,6 +54,15 @@ namespace LAIMIStock.Controllers
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
                     TempData["msg"] = "<script>alert('Consumo exitoso');</script>";
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    //Bitacora supply = new Bitacora();
+                    var consumo = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                    consumo.Add(new Bitacora { nombre = "Consumo de suministro", descripcion = valoresSuministro.nombre, fecha = fechaHoy, idUsuario = 2, idTipoAccion = 8 });
+                    db.SaveChanges();
                 }
                 else
                 {

@@ -81,6 +81,14 @@ namespace LAIMIStock.Controllers
                 db.CategoriasSuministros.Add(category);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
+                /*
+                * Se añade a bitácora
+                */
+
+                var bitacora = db.Set<Bitacora>();
+                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                bitacora.Add(new Bitacora { nombre = "Nueva categoría suminstro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 5 });
+                db.SaveChanges();
             }
             catch (DbEntityValidationException ex)
             {
@@ -124,6 +132,15 @@ namespace LAIMIStock.Controllers
             db.Configuration.ValidateOnSaveEnabled = false;
             db.SaveChanges();
 
+            /*
+            * Se añade a bitácora
+            */
+            //Bitacora supply = new Bitacora();
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+            bitacora.Add(new Bitacora { nombre = "Nuevo suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 2 });
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -160,6 +177,13 @@ namespace LAIMIStock.Controllers
                     supplyDB.precio = model.precio;
                     supplyDB.idCategoria = model.idCategoria;
                     db.SaveChanges();
+                    /*
+            * Se añade a bitácora
+            */
+                    //Bitacora supply = new Bitacora();
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                    bitacora.Add(new Bitacora { nombre = "Editar suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 6 });
                 }
             }
             catch (DbEntityValidationException ex)
@@ -212,6 +236,15 @@ namespace LAIMIStock.Controllers
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
                     TempData["msg"] = "<script>alert('¡Recarga exitosa!');</script>";
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    //Bitacora supply = new Bitacora();
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                    bitacora.Add(new Bitacora { nombre = "Agregar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 9 });
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -244,6 +277,15 @@ namespace LAIMIStock.Controllers
             Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
 
             db.Suministros.Remove(supply);
+            db.SaveChanges();
+
+            /*
+            * Se añade a bitácora
+            */
+            //Bitacora supply = new Bitacora();
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 12 });
             db.SaveChanges();
 
             return RedirectToAction("Index");

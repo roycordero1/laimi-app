@@ -80,6 +80,14 @@ namespace LAIMIStock.Controllers
                 db.CategoriasActivos.Add(category);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
+                /*
+                * Se añade a bitácora
+                */
+               
+                var bitacora = db.Set<Bitacora>();
+                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy"));
+                bitacora.Add(new Bitacora { nombre = "Nueva categoría activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 4 });
+                db.SaveChanges();
             }
             catch (DbEntityValidationException ex)
             {
@@ -120,6 +128,14 @@ namespace LAIMIStock.Controllers
 
                 db.Activos.Add(asset);
                 db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+                /*
+                * Se añade a bitácora
+                */
+
+                var bitacora = db.Set<Bitacora>();
+                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                bitacora.Add(new Bitacora { nombre = "Nuevo activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 3 });
                 db.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -169,6 +185,14 @@ namespace LAIMIStock.Controllers
                     assetDB.estado = model.estado;
                     assetDB.idCategoria = model.idCategoria;
                     db.SaveChanges();
+                    /*
+                    * Se añade a bitácora
+                    */
+
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+                    bitacora.Add(new Bitacora { nombre = "Editar activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 7 });
+                    db.SaveChanges();
                 }
             }
             catch (DbEntityValidationException ex)
@@ -194,6 +218,14 @@ namespace LAIMIStock.Controllers
             Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
 
             db.Activos.Remove(asset);
+            db.SaveChanges();
+            /*
+            * Se añade a bitácora
+            */
+
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar activo", descripcion = asset.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 3 });
             db.SaveChanges();
 
             return RedirectToAction("Index");
