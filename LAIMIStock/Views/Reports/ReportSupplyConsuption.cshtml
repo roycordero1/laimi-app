@@ -30,7 +30,7 @@
         <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
     </button><br/>
         
-        @if (@ViewBag.ConsumoSuministro != null)
+        if (@ViewBag.ConsumoSuministro != null)
         {
             <table id="myTable">
                 <tr>
@@ -41,7 +41,7 @@
             @foreach (var supply in @ViewBag.ConsumoSuministro)
             {
                 <tr>     
-                    <td>@supply.nombre</td>
+                    <td>@supply.descripcion</td>
                     <td>@supply.fecha</td>                 
                 </tr>
             }
