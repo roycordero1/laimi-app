@@ -2,13 +2,19 @@
     margin: 15px 15px 15px 0;
 }
 
+.btn-login {
+    color: #ffffff;
+    background-color: #158cba;
+    border-color: #127ba3;
+}
+
 .btn:hover {
     margin-top: 15px;
     border-bottom-width: 4px;
 }
 
 .btn:active {
-    margin-top: 15px;
+    margin-top: 19px;
     border-bottom-width: 0;
 }
 

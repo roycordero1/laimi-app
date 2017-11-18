@@ -1,20 +1,16 @@
 ﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
-
 @{
     if (Convert.ToInt32(Session["usuarioID"]) != 1)
     {
         Response.Redirect("~/Login/Index");
     }
-    ViewBag.Title = "AlertsView";
+    ViewBag.Title = "Alertas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <h2>Alertas</h2>
 
-
-@if (ViewBag.alertsDetails != null)
+@if (ViewBag.alertsDetails.Count != 0)
 {
 
     <table id="myTable">

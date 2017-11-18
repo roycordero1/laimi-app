@@ -1,0 +1,16 @@
+﻿@model LAIMIStock.Models.CategoriasActivos
+@{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+    ViewBag.Title = "Eliminar categoría";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>¿Realmente desea eliminar la categoría @Model.nombre?</h4>
+<h5>¡Eliminará también todos los activos de esta categoría!</h5>
+
+@Html.ActionLink("Eliminar", "DeleteCategory", "AssetCategories", new { @id = Model.idCategoriaActivo }, new { @class = "btn btn-danger" })
+@Html.ActionLink("Cancelar", "ListAssets", "AssetCategories", new { area = "" }, new { @class = "btn btn-primary" })
+

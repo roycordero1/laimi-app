@@ -1,8 +1,14 @@
 ﻿@model LAIMIStock.ViewModels.ListCategoriesAViewModel
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Categorías";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@Html.Raw(TempData["msg"])
 
 <h2>Categorías de Activos</h2>
 

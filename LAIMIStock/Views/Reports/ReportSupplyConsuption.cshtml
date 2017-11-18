@@ -4,11 +4,11 @@
     {
         Response.Redirect("~/Login/Index");
     }
-    ViewBag.Title = "ReportSupplyConsuption";
+    ViewBag.Title = "Consumo de suministros";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reporte de Consumo Suministro</h2>
+<h3>Reporte - Consumo de suministros</h3>
 
 @using (Html.BeginForm("GenerateReport", "Reports", FormMethod.Post))
 {
@@ -25,7 +25,7 @@
         @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
     </div>
 
-    <button type="submit" class="btn-consultar">
+    <button type="submit" class="btn btn-primary">
         CONSULTAR
         <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
     </button><br/>

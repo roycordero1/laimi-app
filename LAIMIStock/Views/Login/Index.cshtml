@@ -19,7 +19,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>LAIMI - Sistema de Inventario</title>
+    <title>Inventario - LAIMI</title>
     <link rel="stylesheet" href="~/Content/css/loginStyle.css">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
           rel="stylesheet" type='text/css'>
@@ -32,11 +32,10 @@
     {
         <div class="container">
             <form className="login-form">
-                <h1 class="sign-in--title">Inicio de Sesión</h1>
+                <h1 class="sign-in--title">Inicio de sesión</h1>
                 <div class="form-input">
 
                     @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { placeholder = "Usuario" } })
-                    <br />
                     @Html.ValidationMessageFor(model => model.nombre)
 
                 </div>
@@ -53,7 +52,7 @@
                     <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
                 </div>
 
-                <button type="submit" class="btn-login">
+                <button type="submit" class="btn btn-login btn-primary">
                     ENTRAR
                     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                 </button>

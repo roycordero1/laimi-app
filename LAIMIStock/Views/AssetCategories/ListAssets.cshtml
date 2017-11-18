@@ -1,10 +1,14 @@
 ﻿@model LAIMIStock.ViewModels.ListAssetsViewModel
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Activos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Activos</h2>
+<h2>Activos - @Model.categoryName</h2>
 
 @if (Model.Activos.Count > 0)
 {
@@ -52,6 +56,9 @@ else
 {
     <h4>¡No existe ningún activo de esta categoría!</h4>
 }
-
+<br />
+<a href="@Url.Action("DeleteCategoryForm", "AssetCategories", new {id = Model.categoryId })">
+    Eliminar categoría
+</a>
 
 

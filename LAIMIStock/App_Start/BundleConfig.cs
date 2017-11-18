@@ -25,7 +25,7 @@ namespace LAIMIStock
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
                       "~/Content/js/sort-table.js",
-                      "~/Content/js/refresh-textbox.js"));
+                      "~/Content/js/table-pager.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap-lumen.css",

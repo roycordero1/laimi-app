@@ -1,5 +1,9 @@
 ﻿@model LAIMIStock.Models.Suministros
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Nuevo suministro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,9 +13,11 @@
 @using (Html.BeginForm("AddSupply", "SupplyCategories", FormMethod.Post))
 {
     <label for="codigo">Código</label>
-    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo" })
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo", required = "required" })
+    @Html.ValidationMessageFor(model => model.codigo)
     <label for="nombre">Nombre</label>
-    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre", required = "required" })
+    @Html.ValidationMessageFor(model => model.nombre)
     <label for="descripcion">Descripción</label>
     @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
     <label for="fecha-caducidad">Fecha de caducidad</label>
@@ -23,13 +29,16 @@
     <label for="localizacion">Localizacion</label>
     @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
     <label for="cantidad">Cantidad</label>
-    @Html.TextBoxFor(model => model.cantidad, new { @class = "form-control", @id = "cantidad", @type = "number" })
+    @Html.TextBoxFor(model => model.cantidad, new { @class = "form-control", @id = "cantidad", @type = "number", required = "required" })
+    @Html.ValidationMessageFor(model => model.cantidad)
     <label for="limite">Límite mínimo de cantidad</label>
-    @Html.TextBoxFor(model => model.limiteSuministro, new { @class = "form-control", @id = "limite", @type = "number" })
+    @Html.TextBoxFor(model => model.limiteSuministro, new { @class = "form-control", @id = "limite", @type = "number", required = "required" })
+    @Html.ValidationMessageFor(model => model.limiteSuministro)
     <label for="categoria">Categoría</label>
-    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria", required = "required" })
+    @Html.ValidationMessageFor(model => model.idCategoria)
     @Html.HiddenFor(model => model.fechaIngreso)
 
-    <input type="submit" value="Agregar" class="btn btn-primary" />
+    <button type="submit" class="btn btn-primary">Agregar</button>
 }
 

@@ -1,5 +1,9 @@
 ﻿@model LAIMIStock.Models.Suministros
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Eliminar suministro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }

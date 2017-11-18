@@ -1,10 +1,14 @@
 ﻿﻿@model IEnumerable<LAIMIStock.Models.Suministros>
 @{
-    ViewBag.Title = "ReportTotalValue";
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+    ViewBag.Title = "Valor total";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reporte Valor Total</h2>
+<h3>Reporte - Valor total de suministros</h3>
 
 
 @if (ViewBag.TotalValue != null)
@@ -12,7 +16,7 @@
 
     <table id="myTable">
         <tr>
-            <th onclick="sortTable(0)">Valor Total</th>
+            <th onclick="sortTable(0)">Valor total</th>
         </tr>
 
         

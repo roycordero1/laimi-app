@@ -11,18 +11,23 @@ namespace LAIMIStock.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Activos
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de código es obligatorio")]
         public string codigo { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de nombre es obligatorio")]
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public decimal precio { get; set; }
         public Nullable<System.DateTime> fechaIngreso { get; set; }
         public Nullable<System.DateTime> fechaExpiracion { get; set; }
         public string localizacion { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de estado es obligatorio")]
         public Nullable<int> estado { get; set; }
         public int idActivo { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de categoría es obligatorio")]
         public Nullable<int> idCategoria { get; set; }
     
         public virtual CategoriasActivos CategoriasActivos { get; set; }

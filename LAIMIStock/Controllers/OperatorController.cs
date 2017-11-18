@@ -53,21 +53,20 @@ namespace LAIMIStock.Controllers
                     valoresSuministro.cantidad = valoresSuministro.cantidad - 1;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    TempData["msg"] = "<script>alert('Consumo exitoso');</script>";
+                    TempData["msg"] = "<script>alert('¡Consumo exitoso!');</script>";
 
                     /*
                     * Se añade a bitácora
-                    */
-                    //Bitacora supply = new Bitacora();
+                    */                    
                     var consumo = db.Set<Bitacora>();
                     DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                    consumo.Add(new Bitacora { nombre = "Consumo de suministro", descripcion = valoresSuministro.nombre, fecha = fechaHoy, idUsuario = 2, idTipoAccion = 8 });
+                    consumo.Add(new Bitacora { nombre = "Consumo de suministro", descripcion = valoresSuministro.nombre, fecha = fechaHoy, idUsuario = 2, idTipoAccion = 7 });
                     db.SaveChanges();
                 }
                 else
                 {
                     
-                    Response.Write("<script>alert(No hay suficiente suministros para consumir)</script>");
+                    Response.Write("<script>alert(¡No hay suficientes suministros para consumir!)</script>");
                 }
 
                 return RedirectToAction("OperadorView", "Operator");

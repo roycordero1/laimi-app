@@ -1,5 +1,9 @@
 ﻿@model LAIMIStock.Models.Activos
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Nuevo activo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,9 +13,11 @@
 @using (Html.BeginForm("AddAsset", "AssetCategories", FormMethod.Post))
 {
     <label for="codigo">Código</label>
-    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo" })
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo", required = "required" })
+    @Html.ValidationMessageFor(model => model.codigo)
     <label for="nombre">Nombre</label>
-    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre", required = "required" })
+    @Html.ValidationMessageFor(model => model.nombre)
     <label for="descripcion">Descripción</label>
     @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
     <label for="precio">Precio</label>
@@ -21,7 +27,8 @@
     <label for="localizacion">Localización</label>
     @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
     <label for="categoria">Categoría</label>
-    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria", required = "required" })
+    @Html.ValidationMessageFor(model => model.idCategoria)
     @Html.HiddenFor(model => model.fechaIngreso)
 
     <input type="submit" value="Agregar" class="btn btn-primary" />

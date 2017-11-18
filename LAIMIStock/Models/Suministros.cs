@@ -11,30 +11,35 @@ namespace LAIMIStock.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
 
     public partial class Suministros
     {
+        public int idSuministro { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de código es obligatorio")]
         public string codigo { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de nombre es obligatorio")]
+        public string nombre { get; set; }
         public string descripcion { get; set; }
         public Nullable<System.DateTime> fechaIngreso { get; set; }
         public Nullable<System.DateTime> fechaCaducidad { get; set; }
         public Nullable<decimal> precio { get; set; }
         public Nullable<int> objetoGasto { get; set; }
         public string localizacion { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de cantidad es obligatorio")]
         public int cantidad { get; set; }
-        public int idSuministro { get; set; }
-        public Nullable<int> idCategoria { get; set; }
-        public string nombre { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de límite mínimo de cantidad es obligatorio")]
         public int limiteSuministro { get; set; }
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de categoría es obligatorio")]
+        public int idCategoria { get; set; }
+    
         public virtual CategoriasSuministros CategoriasSuministros { get; set; }
 
         [NotMapped]
         public int selectedSupply { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem> supplies { get; set; }
-
     }
 }

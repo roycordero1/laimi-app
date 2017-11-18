@@ -13,7 +13,15 @@ namespace LAIMIStock.Controllers
     {
         public ActionResult Index()
         {
+
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             var categoriesDb = db.CategoriasSuministros.DefaultIfEmpty();
 
             var categoriesList = new List<CategoriasSuministros>();
@@ -33,7 +41,15 @@ namespace LAIMIStock.Controllers
         public ActionResult ListSupplies(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             var suppliesDb = db.Suministros.Where(x => x.idCategoria == id);
+            var categoryDb = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == id);
 
 
             var suppliesList = new List<Suministros>();
@@ -44,7 +60,9 @@ namespace LAIMIStock.Controllers
 
             var viewModel = new ListSuppliesViewModel()
             {
-                Suministros = suppliesList
+                Suministros = suppliesList,
+                categoryId = id,
+                categoryName = categoryDb.nombre
             };
 
             return View(viewModel);
@@ -52,55 +70,78 @@ namespace LAIMIStock.Controllers
 
         public ActionResult ChooseAddType()
         {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             return View();
         }
 
         public ActionResult AddCategoryForm()
         {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             return View();
         }
 
         public ActionResult AddCategory(CategoriasSuministros model, HttpPostedFileBase file)
         {
 
-            try
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+            file.SaveAs(path);
+
+            CategoriasSuministros category = new CategoriasSuministros
             {
-                laimistockappEntities db = new laimistockappEntities();
+                nombre = model.nombre,
+                descripcion = model.descripcion,
+                imagenURL = baseUrl + "Content/img/" + file.FileName
+            };
 
-                string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
-                string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
-                file.SaveAs(path);
+            db.CategoriasSuministros.Add(category);
+            db.Configuration.ValidateOnSaveEnabled = false;
+            db.SaveChanges();
 
-                CategoriasSuministros category = new CategoriasSuministros
-                {
-                    nombre = model.nombre,
-                    descripcion = model.descripcion,
-                    imagenURL = baseUrl + "Content/img/" + file.FileName
-                };
+            /*
+            * Se añade a bitácora
+            */
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Nueva categoría suminstro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 3 });
+            db.SaveChanges();
 
-                db.CategoriasSuministros.Add(category);
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                /*
-                * Se añade a bitácora
-                */
-
-                var bitacora = db.Set<Bitacora>();
-                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                bitacora.Add(new Bitacora { nombre = "Nueva categoría suminstro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 5 });
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                throw ex;
-            }
-
-            return RedirectToAction("Index");
+            TempData["msg"] = "<p class='status-message'>¡Categoría añadida!</p>";
+            return RedirectToAction("AddCategoryForm");
         }
 
         public ActionResult AddSupplyForm()
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             List<CategoriasSuministros> list = db.CategoriasSuministros.ToList();
             ViewBag.CategoriesList = new SelectList(list, "IdCategoriaSuministro", "nombre");
 
@@ -112,6 +153,12 @@ namespace LAIMIStock.Controllers
         {
 
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
 
             Suministros supply = new Suministros
             {
@@ -135,18 +182,25 @@ namespace LAIMIStock.Controllers
             /*
             * Se añade a bitácora
             */
-            //Bitacora supply = new Bitacora();
             var bitacora = db.Set<Bitacora>();
-            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-            bitacora.Add(new Bitacora { nombre = "Nuevo suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 2 });
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Nuevo suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 1 });
             db.SaveChanges();
 
+            TempData["msg"] = "<p class='status-message'>¡Suministro añadido!</p>";
             return RedirectToAction("Index");
         }
 
         public ActionResult EditSupplyForm(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
 
             List<CategoriasSuministros> list = db.CategoriasSuministros.ToList();
@@ -159,47 +213,66 @@ namespace LAIMIStock.Controllers
         public ActionResult EditSupply(int idSuministro, Suministros model)
         {
 
-            try
-            {
-                laimistockappEntities db = new laimistockappEntities();
-                Suministros supplyDB = new Suministros();
-                supplyDB = db.Suministros.SingleOrDefault(x => x.idSuministro == idSuministro);
 
-                if (supplyDB.codigo != model.codigo |
-                    supplyDB.nombre != model.nombre |
-                    supplyDB.descripcion != model.descripcion |
-                    supplyDB.precio != model.precio |
-                    supplyDB.idCategoria != model.idCategoria)
-                {
-                    supplyDB.codigo = model.codigo;
-                    supplyDB.nombre = model.nombre;
-                    supplyDB.descripcion = model.descripcion;
-                    supplyDB.precio = model.precio;
-                    supplyDB.idCategoria = model.idCategoria;
-                    db.SaveChanges();
-                    /*
-            * Se añade a bitácora
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
             */
-                    //Bitacora supply = new Bitacora();
-                    var bitacora = db.Set<Bitacora>();
-                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                    bitacora.Add(new Bitacora { nombre = "Editar suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 6 });
-                }
-            }
-            catch (DbEntityValidationException ex)
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            Suministros supplyDB = new Suministros();
+            supplyDB = db.Suministros.SingleOrDefault(x => x.idSuministro == idSuministro);
+
+            if (supplyDB.codigo != model.codigo |
+                supplyDB.nombre != model.nombre |
+                supplyDB.descripcion != model.descripcion |
+                supplyDB.fechaCaducidad != model.fechaCaducidad |
+                supplyDB.precio != model.precio |
+                supplyDB.objetoGasto != model.objetoGasto |
+                supplyDB.localizacion != model.localizacion |
+                supplyDB.cantidad != model.cantidad |
+                supplyDB.limiteSuministro != model.limiteSuministro |
+                supplyDB.idCategoria != model.idCategoria)
             {
-                throw ex;
+                supplyDB.codigo = model.codigo;
+                supplyDB.nombre = model.nombre;
+                supplyDB.descripcion = model.descripcion;
+                supplyDB.fechaCaducidad = model.fechaCaducidad;
+                supplyDB.precio = model.precio;
+                supplyDB.objetoGasto = model.objetoGasto;
+                supplyDB.localizacion = model.localizacion;
+                supplyDB.cantidad = model.cantidad;
+                supplyDB.limiteSuministro = model.limiteSuministro;
+                supplyDB.idCategoria = model.idCategoria;
+                db.SaveChanges();
+
+                /*
+                * Se añade a bitácora
+                */
+                var bitacora = db.Set<Bitacora>();
+                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                bitacora.Add(new Bitacora { nombre = "Editar suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 5 });
             }
 
+            TempData["msg"] = "<p class='status-message'>¡Suministro editado!</p>";
             return RedirectToAction("Index");
         }
 
         public ActionResult RechargeSupplyForm(Suministros supply)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             supply.supplies = db.Suministros.Select(x => new SelectListItem
             {
-                Value = x.codigo,
+                Value = x.idSuministro.ToString(),
                 Text = x.nombre
             });
 
@@ -225,6 +298,13 @@ namespace LAIMIStock.Controllers
         public ActionResult RechargeSupply(Suministros supply)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             int selectedValueId = supply.selectedSupply;
 
             if (selectedValueId != 0)
@@ -240,10 +320,9 @@ namespace LAIMIStock.Controllers
                     /*
                     * Se añade a bitácora
                     */
-                    //Bitacora supply = new Bitacora();
                     var bitacora = db.Set<Bitacora>();
-                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                    bitacora.Add(new Bitacora { nombre = "Agregar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 9 });
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Agregar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 8 });
                     db.SaveChanges();
                 }
                 else
@@ -265,6 +344,13 @@ namespace LAIMIStock.Controllers
         public ActionResult DeleteSupplyForm(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
 
             return View(supply);
@@ -274,6 +360,13 @@ namespace LAIMIStock.Controllers
         {
 
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Suministros supply = db.Suministros.SingleOrDefault(x => x.idSuministro == id);
 
             db.Suministros.Remove(supply);
@@ -282,14 +375,63 @@ namespace LAIMIStock.Controllers
             /*
             * Se añade a bitácora
             */
-            //Bitacora supply = new Bitacora();
             var bitacora = db.Set<Bitacora>();
-            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-            bitacora.Add(new Bitacora { nombre = "Eliminar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 12 });
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar suministro", descripcion = supply.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 9 });
             db.SaveChanges();
 
+            TempData["msg"] = "<p class='status-message'>¡Suministro eliminado!</p>";
             return RedirectToAction("Index");
         }
 
+        public ActionResult DeleteCategoryForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasSuministros category = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == id);
+
+            return View(category);
+        }
+
+        public ActionResult DeleteCategory(int id)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasSuministros category = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == id);
+
+            db.CategoriasSuministros.Remove(category);
+
+            var suppliesDb = db.Suministros.Where(x => x.idCategoria == id);            
+            foreach (var supplyAux in suppliesDb)
+            {
+                db.Suministros.Remove(supplyAux);
+            }
+
+            db.SaveChanges();
+
+            /*
+            * Se añade a bitácora
+            */
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar categoria suministro", descripcion = category.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 11 });
+            db.SaveChanges();
+
+            TempData["msg"] = "<p class='status-message'>¡Categoría eliminada!</p>";
+            return RedirectToAction("Index");
+        }
     }
 }

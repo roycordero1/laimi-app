@@ -213,78 +213,75 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Activos.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bitacora.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriasActivos.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriasSuministros.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LaimiStockAppDB.Context.cs">
+    <Compile Include="Models\LAIMIStockAppDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaimiStockAppDB.Context.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaimiStockAppDB.cs">
+    <Compile Include="Models\LAIMIStockAppDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LaimiStockAppDB.Designer.cs">
+    <Compile Include="Models\LAIMIStockAppDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LaimiStockAppDB.edmx</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\reportAmountInventary_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\reportAssetState_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\reportLog_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\reportSupplyConsuption_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectActivos_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectBitacora_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectRoles_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectSuministros_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectTiposAccion_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectUsuarios_Result.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Suministros.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposAccion.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>LaimiStockAppDB.tt</DependentUpon>
+      <DependentUpon>LAIMIStockAppDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -304,19 +301,20 @@
     <Content Include="Content\img\sort-arrows.png" />
     <Content Include="Content\js\sort-table.js" />
     <Content Include="Content\css\tables.css" />
+    <Content Include="Content\js\table-pager.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
-    <Content Include="Models\LaimiStockAppDB.Context.tt">
+    <Content Include="Models\LAIMIStockAppDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaimiStockAppDB.edmx</DependentUpon>
-      <LastGenOutput>LaimiStockAppDB.Context.cs</LastGenOutput>
+      <DependentUpon>LAIMIStockAppDB.edmx</DependentUpon>
+      <LastGenOutput>LAIMIStockAppDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\LaimiStockAppDB.tt">
+    <Content Include="Models\LAIMIStockAppDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LaimiStockAppDB.edmx</DependentUpon>
-      <LastGenOutput>LaimiStockAppDB.cs</LastGenOutput>
+      <DependentUpon>LAIMIStockAppDB.edmx</DependentUpon>
+      <LastGenOutput>LAIMIStockAppDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -325,12 +323,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\LaimiStockAppDB.edmx">
+    <EntityDeploy Include="Models\LAIMIStockAppDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LaimiStockAppDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>LAIMIStockAppDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\LaimiStockAppDB.edmx.diagram">
-      <DependentUpon>LaimiStockAppDB.edmx</DependentUpon>
+    <Content Include="Models\LAIMIStockAppDB.edmx.diagram">
+      <DependentUpon>LAIMIStockAppDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -405,6 +403,8 @@
     <Content Include="Views\Reports\ReportBlog.cshtml" />
     <Content Include="Views\Reports\ReportSuppliesPerLab.cshtml" />
     <Content Include="Views\Reports\ReportSupplyConsuption.cshtml" />
+    <Content Include="Views\SupplyCategories\DeleteCategoryForm.cshtml" />
+    <Content Include="Views\AssetCategories\DeleteCategoryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

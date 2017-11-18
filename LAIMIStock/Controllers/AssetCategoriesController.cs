@@ -14,6 +14,13 @@ namespace LAIMIStock.Controllers
         public ActionResult Index()
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             var categoriesDb = db.CategoriasActivos.DefaultIfEmpty();
 
             var categoriesList = new List<CategoriasActivos>();
@@ -33,7 +40,15 @@ namespace LAIMIStock.Controllers
         public ActionResult ListAssets(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             var assetsDb = db.Activos.Where(x => x.idCategoria == id);
+            var categoryDb = db.CategoriasActivos.SingleOrDefault(x => x.idCategoriaActivo == id);
 
 
             var assetsList = new List<Activos>();
@@ -44,7 +59,9 @@ namespace LAIMIStock.Controllers
 
             var viewModel = new ListAssetsViewModel()
             {
-                Activos = assetsList
+                Activos = assetsList,
+                categoryId = id,
+                categoryName = categoryDb.nombre
             };
 
             return View(viewModel);
@@ -52,54 +69,78 @@ namespace LAIMIStock.Controllers
 
         public ActionResult ChooseAddType()
         {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             return View();
         }
 
         public ActionResult AddCategoryForm()
         {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             return View();
         }
 
         public ActionResult AddCategory(CategoriasActivos model, HttpPostedFileBase file)
         {
 
-            try
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;      
+
+            string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
+            file.SaveAs(path);
+
+            CategoriasActivos category = new CategoriasActivos
             {
-                laimistockappEntities db = new laimistockappEntities();
+                nombre = model.nombre,
+                descripcion = model.descripcion,
+                imagenURL = "/Content/img/" + file.FileName
+            };
 
-                string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
-                file.SaveAs(path);
+            db.CategoriasActivos.Add(category);
+            db.Configuration.ValidateOnSaveEnabled = false;
+            db.SaveChanges();
 
-                CategoriasActivos category = new CategoriasActivos
-                {
-                    nombre = model.nombre,
-                    descripcion = model.descripcion,
-                    imagenURL = "/Content/img/" + file.FileName
-                };
+            /*
+            * Se añade a bitácora
+            */               
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Nueva categoría activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 4 });
+            db.SaveChanges();
+            
 
-                db.CategoriasActivos.Add(category);
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                /*
-                * Se añade a bitácora
-                */
-               
-                var bitacora = db.Set<Bitacora>();
-                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("MM/dd/yyyy"));
-                bitacora.Add(new Bitacora { nombre = "Nueva categoría activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 4 });
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                throw ex;
-            }
-
-            return RedirectToAction("Index");
+            TempData["msg"] = "<p class='status-message'>¡Categoría añadida!</p>";
+            return RedirectToAction("AddCategoryForm");
         }
 
         public ActionResult AddAssetForm()
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             List<CategoriasActivos> list = db.CategoriasActivos.ToList();
             ViewBag.CategoriesList = new SelectList(list, "IdCategoriaActivo", "nombre");
 
@@ -108,47 +149,54 @@ namespace LAIMIStock.Controllers
 
         public ActionResult AddAsset(Activos model)
         {
+            
+            laimistockappEntities db = new laimistockappEntities();
 
-            try
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            Activos asset = new Activos
             {
-                laimistockappEntities db = new laimistockappEntities();
+                codigo = model.codigo,
+                nombre = model.nombre,
+                descripcion = model.descripcion,
+                precio = model.precio,
+                fechaIngreso = System.DateTime.Now,
+                fechaExpiracion = model.fechaExpiracion,
+                localizacion = model.localizacion,
+                estado = 1,
+                idCategoria = model.idCategoria
+            };
 
-                Activos asset = new Activos
-                {
-                    codigo = model.codigo,
-                    nombre = model.nombre,
-                    descripcion = model.descripcion,
-                    precio = model.precio,
-                    fechaIngreso = System.DateTime.Now,
-                    fechaExpiracion = model.fechaExpiracion,
-                    localizacion = model.localizacion,
-                    estado = 1,
-                    idCategoria = model.idCategoria
-                };
+            db.Activos.Add(asset);
+            db.Configuration.ValidateOnSaveEnabled = false;
+            db.SaveChanges();
 
-                db.Activos.Add(asset);
-                db.Configuration.ValidateOnSaveEnabled = false;
-                db.SaveChanges();
-                /*
-                * Se añade a bitácora
-                */
+            /*
+            * Se añade a bitácora
+            */
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Nuevo activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 2 });
+            db.SaveChanges();
 
-                var bitacora = db.Set<Bitacora>();
-                DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                bitacora.Add(new Bitacora { nombre = "Nuevo activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 3 });
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                throw ex;
-            }
-
+            TempData["msg"] = "<p class='status-message'>¡Activo añadido!</p>";
             return RedirectToAction("Index");
         }
 
         public ActionResult EditAssetForm(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
 
             List<CategoriasActivos> list = db.CategoriasActivos.ToList();
@@ -164,6 +212,13 @@ namespace LAIMIStock.Controllers
             try
             {
                 laimistockappEntities db = new laimistockappEntities();
+
+                /*
+                * Revisar cantidad de alertas
+                */
+                var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+                Session["Alerts"] = alerts.Count;
+
                 Activos assetDB = new Activos();
                 assetDB = db.Activos.SingleOrDefault(x => x.idActivo == idActivo);
 
@@ -190,8 +245,8 @@ namespace LAIMIStock.Controllers
                     */
 
                     var bitacora = db.Set<Bitacora>();
-                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-                    bitacora.Add(new Bitacora { nombre = "Editar activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 7 });
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Editar activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 6 });
                     db.SaveChanges();
                 }
             }
@@ -200,12 +255,20 @@ namespace LAIMIStock.Controllers
                 throw ex;
             }
 
+            TempData["msg"] = "<p class='status-message'>¡Activo editado!</p>";
             return RedirectToAction("Index");
         }
 
         public ActionResult DeleteAssetForm(int id)
         {
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
 
             return View(asset);
@@ -215,19 +278,77 @@ namespace LAIMIStock.Controllers
         {
 
             laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
             Activos asset = db.Activos.SingleOrDefault(x => x.idActivo == id);
 
             db.Activos.Remove(asset);
             db.SaveChanges();
+            
             /*
             * Se añade a bitácora
             */
-
             var bitacora = db.Set<Bitacora>();
-            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"));
-            bitacora.Add(new Bitacora { nombre = "Eliminar activo", descripcion = asset.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 3 });
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar activo", descripcion = asset.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 10 });
             db.SaveChanges();
 
+            TempData["msg"] = "<p class='status-message'>¡Activo eliminado!</p>";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteCategoryForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasActivos category = db.CategoriasActivos.SingleOrDefault(x => x.idCategoriaActivo == id);
+
+            return View(category);
+        }
+
+        public ActionResult DeleteCategory(int id)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasActivos category = db.CategoriasActivos.SingleOrDefault(x => x.idCategoriaActivo == id);
+
+            db.CategoriasActivos.Remove(category);
+
+            var assetsDb = db.Activos.Where(x => x.idCategoria == id);
+            foreach (var assetAux in assetsDb)
+            {
+                db.Activos.Remove(assetAux);
+            }
+
+            db.SaveChanges();
+
+            /*
+            * Se añade a bitácora
+            */
+            var bitacora = db.Set<Bitacora>();
+            DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            bitacora.Add(new Bitacora { nombre = "Eliminar categoria activo", descripcion = category.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 12 });
+            db.SaveChanges();
+
+            TempData["msg"] = "<p class='status-message'>¡Categoría eliminada!</p>";
             return RedirectToAction("Index");
         }
     }

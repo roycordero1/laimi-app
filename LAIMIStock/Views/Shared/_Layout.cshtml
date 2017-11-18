@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - LAIMI</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Content/js")
 
@@ -47,7 +47,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes</a>
                 <ul class="dropdown-menu">
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Valor Total", "ReportTotalValue", "Reports")</li>
+                    <li>@Html.ActionLink("Valor total", "ReportTotalValue", "Reports")</li>
                     <li>@Html.ActionLink("Cantidad de inventario", "ReportAmountInventory", "Reports")</li>
                     <li>@Html.ActionLink("Estado de los activos", "ReportAssetsState", "Reports")</li>
                     <li>@Html.ActionLink("Bitácora", "ReportBlog", "Reports")</li>
@@ -60,18 +60,29 @@
             </li>
         </ul>
     </div>
-}
-
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p style="float: right;">Laboratorio Institucional de Microcomputadoras - @DateTime.Now.Year</p>
+            <p style="float: right; margin-right: 40px;">Laboratorio Institucional de Microcomputadoras - @DateTime.Now.Year</p>
+        </footer>
+    </div>
+}
+else
+{
+    <div class="container body-content" style="width: 100%;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="float: right; margin-right: 40px;">Laboratorio Institucional de Microcomputadoras - @DateTime.Now.Year</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+}
+            
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

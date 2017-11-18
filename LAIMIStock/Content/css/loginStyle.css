@@ -1,10 +1,9 @@
-﻿﻿body{
+﻿﻿body {
     margin: 0 auto;
     background-size: 100% 720px;
-
 }
 
-.container{
+.container {
     width: 400px;
     background-color: rgb(242, 243, 244);
     display: flex;
@@ -16,11 +15,14 @@
     padding-bottom: 20px;
 }
 
-.sign-in--title{
-    margin-top: 10px !important;
+.sign-in--title {
+    font-family: Roboto;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-top: 20px;
 }
 
-input{
+input {
     font-size: 18px;
     margin-bottom: 20px;
     padding-left: 35px;
@@ -29,7 +31,7 @@ input{
     text-indent: 30px;
 }
 
-.form-input::before{
+.form-input::before {
     position: absolute;
     font-family: FontAwesome;
     content:"\f007";
@@ -38,24 +40,31 @@ input{
     font-size: 30px;
 }
 
-.form-input:nth-child(3)::before{
+.form-input:nth-child(3)::before {
     content: "\f023";
 
 }
 
 /*Mensaje de error de autentificación*/
-.field-validation-error{
+.field-validation-error {
+    display: block;
+    font-family: Roboto;
     color:red;
-    top: 20px;
-    font-size: 18px;
+    font-size: 16px;    
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
 
-.btn-login{
+.btn-login {
     padding: 15px 30px;
-    color: #fff;
+    color: #ffffff;
+    background-color: #158cba;
     width: 300px;
     border-radius: 4px;
     border: none;
-    background-color: #0A27B8;
     min-width: 300px;
+}
+
+.btn-login:hover {
+    cursor: pointer;
 }

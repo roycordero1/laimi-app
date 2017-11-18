@@ -11,7 +11,8 @@ namespace LAIMIStock.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CategoriasSuministros
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,11 @@ namespace LAIMIStock.Models
         {
             this.Suministros = new HashSet<Suministros>();
         }
-    
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de nombre es obligatorio")]
         public string nombre { get; set; }
         public string descripcion { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de iamgen es obligatorio")]
         public string imagenURL { get; set; }
         public int idCategoriaSuministro { get; set; }
     

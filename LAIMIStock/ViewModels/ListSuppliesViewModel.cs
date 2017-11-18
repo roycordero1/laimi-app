@@ -9,5 +9,7 @@ namespace LAIMIStock.ViewModels
     public class ListSuppliesViewModel
     {
         public List<Suministros> Suministros { get; set; }
+        public int categoryId { get; set; }
+        public string categoryName { get; set; }
     }
 }

@@ -23,3 +23,18 @@ table th:after {
     background-size: 15px 15px;
     background-position: center;
 }
+
+span#prev, span#next {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+span#page {
+    display: inline-block;
+    padding: 0 10px;
+    border: 1px solid black;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #f2f2f2;
+}

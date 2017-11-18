@@ -8,13 +8,26 @@
 }
 
 .navbar-fixed-top {
+    font-family: Roboto;
     top: 20px;
     border: none;
 }
 
-.navbar a:hover {
+.navbar-header a,
+.navbar-right a,
+.navbar-right p {
+    padding: 0 !important;
+    margin: 15px;
+    height: auto;
+    color: white;
+}
+
+.navbar-header a:hover,
+.navbar-right a:hover {
     color: white !important;
-    text-decoration: underline !important;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 3px !important;
+    margin-bottom: 11px;
 }
 
 .nav-sidebar {
@@ -56,4 +69,12 @@
 
 .dropdown-menu .divider {
     margin: 0 0 5px 0;
+}
+
+.status-message {
+    background-color: #f8fff0;
+    border: 1px solid #be7;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 10px;
 }

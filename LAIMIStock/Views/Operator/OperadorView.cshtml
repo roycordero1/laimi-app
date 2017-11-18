@@ -1,58 +1,30 @@
-﻿
-﻿@model LAIMIStock.Models.Suministros
-
+﻿﻿@model LAIMIStock.Models.Suministros
 @{
     if (Convert.ToInt32(Session["usuarioID"]) != 2)
     {
         Response.Redirect("~/Login/Index");
     }
-    ViewBag.Title = "OperadorView";
+    ViewBag.Title = "Operador";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Consumo de suministros</title>
-</head>
-<body>
-
-
-
+<div style="margin-left: 6%;">
+    <h3>Consumir suministro</h3>
     @using (Html.BeginForm("UseSupply", "Operator", FormMethod.Post))
     {
-        <div class="container">
-            <form className="zp-account-form">
-                <h1 class="zp-sign-in--tittle">Consumir suministro</h1>
-                <div class="form-input">
+        <label for="supplies-dropdown">Suministro</label>
+        @Html.DropDownListFor(m => m.selectedSupply, Model.supplies, "Seleccione un suministro", new { @class = "form-control", onchange = @"
+                                                                                                                    var from = document.forms[0];
+                                                                                                                    form.action = 'OperadorView';
+                                                                                                                    form.submit();" })
+        <br>
+        <p>La cantidad actual es de:</p><p style="font-size: 18px;">@Model.cantidad</p>
+        @Html.Raw(TempData["msg"])
 
-                    @Html.DropDownListFor(m => m.selectedSupply, Model.supplies, "Seleccione un suministro", new { onchange = @"
-                                           var from = document.forms[0];
-                                           form.action = 'OperadorView';
-                                           form.submit();" })
-                    <br />
-                    <label>Cantidad disponible</label>
-                    <br />
-                    @Html.TextBoxFor(model => model.cantidad, new { disabled = "disabled" })
-                    <br />
-                    @Html.Raw(TempData["msg"])
-                </div>
-
-
-
-                <button type="submit" class="btn-success">
-                    CONSUMIR
-                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-                </button>
-            </form>
-        </div>
+        <input type="submit" value="Consumir" class="btn btn-primary" />
 
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src="~/Scripts/jquery.validate.min.js"></script>
         <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     }
-</body>
-</html>
-
+</div>

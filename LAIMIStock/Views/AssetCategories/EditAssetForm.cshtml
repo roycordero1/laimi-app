@@ -1,5 +1,9 @@
 ﻿@model LAIMIStock.Models.Activos
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Editar activo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,9 +13,9 @@
 @using (Html.BeginForm("EditAsset", "AssetCategories", new { @idActivo = Model.idActivo }, FormMethod.Post))
 {
     <label for="codigo">Código</label>
-    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo" })
+    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", @id = "codigo", required = "required" })
     <label for="nombre">Nombre</label>
-    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre" })
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "nombre", required = "required" })
     <label for="descripcion">Descripción</label>
     @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
     <label for="precio">Precio</label>
@@ -21,9 +25,9 @@
     <label for="localizacion">Localización</label>
     @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
     <label for="estado">Estado, 1 para activo - 2 para inactivo</label>
-    @Html.TextBoxFor(model => model.estado, new { @class = "form-control", @id = "estado" })
+    @Html.TextBoxFor(model => model.estado, new { @class = "form-control", @id = "estado", required = "required" })
     <label for="categoria">Categoría</label>
-    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria" })
+    @Html.DropDownListFor(model => model.idCategoria, ViewBag.CategoriesList as SelectList, "- Seleccione -", new { @class = "form-control", @id = "categoria", required = "required" })
 
     <input type="submit" value="Editar" class="btn btn-primary" />
 }

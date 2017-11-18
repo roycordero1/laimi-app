@@ -1,5 +1,9 @@
 ﻿@model LAIMIStock.Models.Suministros
 @{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
     ViewBag.Title = "Recarga de suministros";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,8 +13,8 @@
 @using (Html.BeginForm("RechargeSupply", "SupplyCategories", FormMethod.Post))
 {
     <label for="supplies-dropdown">Suministro</label>
-    @Html.DropDownListFor(model => model.selectedSupply, Model.supplies, "Seleccione un suministro", new { @class = "form-control", @id = "supplies-dropdown", onchange = @"
-                                                                                                                                                var form = document.forms[0];
+    @Html.DropDownListFor(m => m.selectedSupply, Model.supplies, "Seleccione un suministro", new { @class = "form-control", @id = "supplies-dropdown", onchange = @"
+                                                                                                                                                var from = document.forms[0];
                                                                                                                                                 form.action = 'RechargeSupplyForm';
                                                                                                                                                 form.submit();" })
     <br>
