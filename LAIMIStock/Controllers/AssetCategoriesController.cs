@@ -351,5 +351,88 @@ namespace LAIMIStock.Controllers
             TempData["msg"] = "<p class='status-message'>¡Categoría eliminada!</p>";
             return RedirectToAction("Index");
         }
+
+        public ActionResult EditCategoryForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasActivos category = db.CategoriasActivos.SingleOrDefault(x => x.idCategoriaActivo == id);
+
+            return View(category);
+        }
+
+        public ActionResult EditCategory(CategoriasActivos model, HttpPostedFileBase file)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasActivos categoryDB = new CategoriasActivos();
+            categoryDB = db.CategoriasActivos.SingleOrDefault(x => x.idCategoriaActivo == model.idCategoriaActivo);
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+
+            if (file != null)
+            {
+                string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
+                if (categoryDB.nombre != model.nombre |
+                categoryDB.descripcion != model.descripcion |
+                categoryDB.imagenURL != baseUrl + "Content/img/" + file.FileName)
+                {
+
+                    categoryDB.nombre = model.nombre;
+                    categoryDB.descripcion = model.descripcion;
+                    categoryDB.imagenURL = baseUrl + "Content/img/" + file.FileName;
+
+                    db.SaveChanges();
+
+                    if (categoryDB.imagenURL != baseUrl + "Content/img/" + file.FileName)
+                    {
+                        file.SaveAs(path);
+                    }
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Editar categoría activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 14 });
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                if (categoryDB.nombre != model.nombre |
+                categoryDB.descripcion != model.descripcion)
+                {
+
+                    categoryDB.nombre = model.nombre;
+                    categoryDB.descripcion = model.descripcion;
+
+                    db.SaveChanges();
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Editar categoría activo", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 14 });
+                    db.SaveChanges();
+                }
+            }
+
+            TempData["msg"] = "<p class='status-message'>¡Categoría editada!</p>";
+            return RedirectToAction("Index");
+        }
     }
 }

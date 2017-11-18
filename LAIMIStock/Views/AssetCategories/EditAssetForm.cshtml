@@ -21,7 +21,7 @@
     <label for="precio">Precio</label>
     @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @id = "precio", @type = "number" })
     <label for="fecha-expiracion">Fecha de expiración</label>
-    @Html.TextBoxFor(model => model.fechaExpiracion, new { @class = "form-control datecontrol", @type = "date", @id = "fecha-expiracion" })
+    @Html.TextBoxFor(model => model.fechaExpiracion, "{0:yyyy-MM-dd}", new { @class = "form-control datecontrol", @placeholder = "DateTime", @type = "date", @id = "fecha-expiracion" })
     <label for="localizacion">Localización</label>
     @Html.TextBoxFor(model => model.localizacion, new { @class = "form-control", @id = "localizacion" })
     <label for="estado">Estado, 1 para activo - 2 para inactivo</label>

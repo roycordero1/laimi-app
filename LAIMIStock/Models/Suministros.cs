@@ -24,6 +24,8 @@ namespace LAIMIStock.Models
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public Nullable<System.DateTime> fechaIngreso { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaCaducidad { get; set; }
         public Nullable<decimal> precio { get; set; }
         public Nullable<int> objetoGasto { get; set; }

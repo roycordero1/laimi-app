@@ -19,7 +19,7 @@
     <label for="descripcion">Descripción</label>
     @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
     <label for="fecha-caducidad">Fecha de caducidad</label>
-    @Html.TextBoxFor(model => model.fechaCaducidad, new { @class = "form-control datecontrol", @type = "date", @id = "fecha-caducidad" })
+    @Html.TextBoxFor(model => model.fechaCaducidad, "{0:yyyy-MM-dd}", new { @class = "form-control datecontrol", @placeholder = "DateTime", @type = "date", @id = "fecha-caducidad" })
     <label for="precio">Precio</label>
     @Html.TextBoxFor(model => model.precio, new { @class = "form-control", @id = "precio" })
     <label for="objeto-gasto">Objeto gasto</label>

@@ -254,6 +254,7 @@ namespace LAIMIStock.Controllers
                 var bitacora = db.Set<Bitacora>();
                 DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
                 bitacora.Add(new Bitacora { nombre = "Editar suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 5 });
+                db.SaveChanges();
             }
 
             TempData["msg"] = "<p class='status-message'>¡Suministro editado!</p>";
@@ -431,6 +432,87 @@ namespace LAIMIStock.Controllers
             db.SaveChanges();
 
             TempData["msg"] = "<p class='status-message'>¡Categoría eliminada!</p>";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EditCategoryForm(int id)
+        {
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasSuministros category = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == id);
+
+            return View(category);
+        }
+
+        public ActionResult EditCategory(CategoriasSuministros model, HttpPostedFileBase file)
+        {
+
+            laimistockappEntities db = new laimistockappEntities();
+
+            /*
+            * Revisar cantidad de alertas
+            */
+            var alerts = db.Suministros.Where(x => x.cantidad <= x.limiteSuministro).ToList();
+            Session["Alerts"] = alerts.Count;
+
+            CategoriasSuministros categoryDB = new CategoriasSuministros();
+            categoryDB = db.CategoriasSuministros.SingleOrDefault(x => x.idCategoriaSuministro == model.idCategoriaSuministro);
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+
+            if (file != null) {
+                string path = HttpContext.Server.MapPath("~/Content/img/") + file.FileName;
+                if (categoryDB.nombre != model.nombre |
+                categoryDB.descripcion != model.descripcion |
+                categoryDB.imagenURL != baseUrl + "Content/img/" + file.FileName)
+                {
+
+                    categoryDB.nombre = model.nombre;
+                    categoryDB.descripcion = model.descripcion;
+                    categoryDB.imagenURL = baseUrl + "Content/img/" + file.FileName;
+
+                    db.SaveChanges();
+
+                    if (categoryDB.imagenURL != baseUrl + "Content/img/" + file.FileName)
+                    {
+                        file.SaveAs(path);
+                    }
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Editar categoría suminisitro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 13 });
+                    db.SaveChanges();
+                }
+            }
+            else {
+                if (categoryDB.nombre != model.nombre |
+                categoryDB.descripcion != model.descripcion)
+                {
+
+                    categoryDB.nombre = model.nombre;
+                    categoryDB.descripcion = model.descripcion;
+
+                    db.SaveChanges();                    
+
+                    /*
+                    * Se añade a bitácora
+                    */
+                    var bitacora = db.Set<Bitacora>();
+                    DateTime fechaHoy = DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+                    bitacora.Add(new Bitacora { nombre = "Editar categoría suministro", descripcion = model.nombre, fecha = fechaHoy, idUsuario = 1, idTipoAccion = 13 });
+                    db.SaveChanges();
+                }
+            }
+
+            TempData["msg"] = "<p class='status-message'>¡Categoría editada!</p>";
             return RedirectToAction("Index");
         }
     }

@@ -405,6 +405,7 @@
     <Content Include="Views\Reports\ReportSupplyConsuption.cshtml" />
     <Content Include="Views\SupplyCategories\DeleteCategoryForm.cshtml" />
     <Content Include="Views\AssetCategories\DeleteCategoryForm.cshtml" />
+    <Content Include="Views\SupplyCategories\EditCategoryForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

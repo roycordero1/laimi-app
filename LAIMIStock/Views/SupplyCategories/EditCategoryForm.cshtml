@@ -1,0 +1,28 @@
+﻿@model LAIMIStock.Models.CategoriasSuministros
+@{
+    if (Convert.ToInt32(Session["usuarioID"]) != 1)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+    ViewBag.Title = "Editar categoría";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Raw(TempData["msg"])
+
+<h3>Edite la categoría</h3>
+
+@using (Html.BeginForm("EditCategory", "SupplyCategories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label for="codigo">Nombre</label>
+    @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", @id = "codigo", required = "required" })
+    <label for="descripcion">Descripción</label>
+    @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", @id = "descripcion" })
+    <label>Imagen actual</label>
+    <img src="@Url.Content(Model.imagenURL)" height="168" width="168" class="img-item" style="display: block;">
+    <label for="file">Nueva imagen</label>
+    <input type="file" name="file" id="file" title="Agregue una imagen" />
+    @Html.HiddenFor(model => model.idCategoriaSuministro)
+
+    <button type="submit" class="btn btn-primary">Editar</button>
+}

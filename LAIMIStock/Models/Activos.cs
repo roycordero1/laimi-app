@@ -22,6 +22,8 @@ namespace LAIMIStock.Models
         public string descripcion { get; set; }
         public decimal precio { get; set; }
         public Nullable<System.DateTime> fechaIngreso { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaExpiracion { get; set; }
         public string localizacion { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo de estado es obligatorio")]

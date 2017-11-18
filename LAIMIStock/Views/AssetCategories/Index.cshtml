@@ -15,9 +15,14 @@
 <div class="img-grid">
     @foreach (var category in Model.Categories)
     {
-        <a href="@Url.Action("ListAssets", "AssetCategories", new {id = @category.idCategoriaActivo})">
-            <img src="@category.imagenURL" height="168" width="168" class="img-item">
-        </a>
+        <div>
+            <a href="@Url.Action("ListAssets", "AssetCategories", new {id = @category.idCategoriaActivo})">
+                <img src="@category.imagenURL" height="168" width="168" class="img-item">
+            </a>
+            <a href="@Url.Action("ListAssets", "AssetCategories", new {id = @category.idCategoriaActivo})" class="category-title">
+                @category.nombre
+            </a>
+        </div>
     }
 </div>
 

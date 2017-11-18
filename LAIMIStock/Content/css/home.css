@@ -7,3 +7,10 @@
 .img-item {
     margin: 10px;
 }
+
+.category-title {
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    text-transform: uppercase;
+}

@@ -14,7 +14,7 @@ namespace LAIMIStock.Controllers
             laimistockappEntities db = new laimistockappEntities();
             supply.supplies = db.Suministros.Select(x => new SelectListItem
             {
-                Value = x.codigo,
+                Value = x.idSuministro.ToString(),
                 Text = x.nombre
             });
 
